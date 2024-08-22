@@ -125,26 +125,7 @@ public:
   virtual void IHeadsetToRuntimeInterface_Unk72() {}
 
   virtual int IHeadsetToRuntimeInterface_Unk73() { return 1; } // Display count?
-  virtual ovrResult GetDisplayList(int a2, ovrDisplayList* displays) {
-    if (displays->Count < 1) {
-      displays->Count = 1; // Force array to resize.
-      return ovrError_InsufficientArraySize;
-    }
-    ovrDisplay* display = displays->Display;
-    strncpy_s(display->UniqueId, "2147881091", 0xFFFFFFFFFFFFFFFF);
-    display->PnpId = 0xD23E;
-    strncpy_s(display->DisplaySerial, "WMHD3032200CB", 0xFFFFFFFFFFFFFFFF); // FIXME(Kaitlyn): Hardcoded display serial.
-    display->Unk0142 = 0x7A39;
-    display->Resolution1.w = 2160;
-    display->Resolution1.h = 1200;
-    display->Resolution2.w = 2160;
-    display->Resolution2.h = 1200;
-    display->RefreshRate.Numerator = 89998;
-    display->RefreshRate.Denominator = 1000;
-    display->Unk015C = 1;
-    display->Luid = 0x10AE100000000;
-    return 0;
-  }
+  virtual ovrResult GetDisplayList(int a2, ovrDisplayList* displays) = 0;
 
   virtual void IHeadsetToRuntimeInterface_Unk75() {}
   virtual void IHeadsetToRuntimeInterface_Unk76() {}
