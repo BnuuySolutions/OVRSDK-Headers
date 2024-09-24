@@ -120,7 +120,7 @@ public:
   }
 
   void RegisterInterface(IInterfaceFactory* factory, ovrInterfaceDesc* desc) {
-    ovrInterfaceDesc2 interfaceDesc;
+    ovrInterfaceDesc2 interfaceDesc{};
     interfaceDesc.Factory = factory;
     interfaceDesc.Desc = *desc;
     Interfaces.push_back(interfaceDesc);

@@ -43,7 +43,7 @@ public:
   virtual void IHeadsetToRuntimeInterface_Unk10(uint32_t a2, const char* serialNumber, __int64 a4) {}
 
   // Appears to be related to HMDEvent?
-  virtual void IHeadsetToRuntimeInterface_Unk11(uint32_t a2, const char* serialNumber, uint32_t eventType, void* a5) {}
+  virtual void IHeadsetToRuntimeInterface_Unk11(uint32_t a2, const char* serialNumber, uint32_t eventType, void* a5) = 0;
 
   // Appears to be related to FirmwareVersionEvent?
   virtual void IHeadsetToRuntimeInterface_Unk12(int a2, const char* serialNumber, __int64 a4) {}
@@ -54,7 +54,8 @@ public:
 
   // Maps roughly to the same OAF event, AFAIK.
   // No clue what a2 or a5 is.
-  virtual void HMDEvent(unsigned int a2, const char* serialNumber, ovrHMDEventType eventType, void* a5) {}
+  virtual void HMDEvent(unsigned int a2, const char* serialNumber, ovrHMDEventType eventType, void* a5) {
+  }
 
   virtual void IHeadsetToRuntimeInterface_Unk16() {}
   virtual void IHeadsetToRuntimeInterface_Unk17() {}
