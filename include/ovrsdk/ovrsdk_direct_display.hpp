@@ -2,6 +2,51 @@
 
 #include "ovrsdk_types.hpp"
 #include "ovrsdk_interface.hpp"
+#include <dxgicommon.h>
+
+typedef enum ovrDisplayOutputType_ {
+  ovrDisplayOutput_Unknown = 0,
+  ovrDisplayOutput_DP = 1,
+  ovrDisplayOutput_DVI = 2,
+  ovrDisplayOutput_HDMI = 3
+} ovrDisplayOutputType;
+
+typedef enum ovrDisplayDongleType_ {
+  ovrDisplayDongle_Unknown = 0,
+  ovrDisplayDongle_None = 1,
+  ovrDisplayDongle_PassiveDPToDVI = 2,
+  ovrDisplayDongle_PassiveDPToHDMI = 3,
+  ovrDisplayDongle_ActiveDPToDVI = 4,
+  ovrDisplayDongle_ActiveDPToHDMI = 5,
+  ovrDisplayDongle_ActiveDPToVGA = 6
+} ovrDisplayDongleType;
+
+typedef struct ovrDisplayProperties_ {
+  ovrGraphicsLuid Luid;
+  ovrDisplayOutputType OutputType;
+  ovrDisplayDongleType DongleType;
+  uint64_t UniqueId;
+  char EdidData[0x100];
+} ovrDisplayProperties;
+
+typedef struct ovrModeDesc_ {
+  ovrSizei Resolution;
+  DXGI_RATIONAL RefreshRate;
+  ovrTextureFormat Format;
+  char Reserved[4]; // TODO(Kaitlyn): Is this actually reserved?
+} ovrModeDesc;
+
+typedef struct ovrPresentStats_ {
+  DXGI_RATIONAL RefreshRate;
+  // TODO(Kaitlyn): Reverse all of this sometime, no clue what any of this is.
+  // Maybe stuff from IDXGISwapChain::GetFrameStatistics?
+  uint64_t Reserved1;
+  uint64_t Reserved2;
+  uint64_t Reserved3;
+  uint64_t Reserved4;
+  uint64_t Reserved5;
+  uint64_t Reserved6;
+} ovrPresentStats;
 
 namespace OVR {
 

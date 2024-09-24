@@ -1,7 +1,6 @@
 #pragma once
 
 #include <windows.h>
-#include <dxgicommon.h>
 #include <cinttypes>
 
 #if defined(_WIN32)
@@ -10,10 +9,6 @@
 #else
 #error "Unsupported Platform."
 #endif
-
-typedef struct ovrSizei_ {
-  int w, h;
-} ovrSizei;
 
 typedef char ovrBool;
 
@@ -65,95 +60,32 @@ typedef enum ovrTextureFormat_ {
   OVR_FORMAT_ENUMSIZE = 0x7fffffff
 } ovrTextureFormat;
 
-typedef enum ovrDisplayOutputType_ {
-  ovrDisplayOutput_Unknown = 0,
-  ovrDisplayOutput_DP = 1,
-  ovrDisplayOutput_DVI = 2,
-  ovrDisplayOutput_HDMI = 3
-} ovrDisplayOutputType;
+typedef struct ovrSizei_ {
+  int w, h;
+} ovrSizei;
 
-typedef enum ovrDisplayDongleType_ {
-  ovrDisplayDongle_Unknown = 0,
-  ovrDisplayDongle_None = 1,
-  ovrDisplayDongle_PassiveDPToDVI = 2,
-  ovrDisplayDongle_PassiveDPToHDMI = 3,
-  ovrDisplayDongle_ActiveDPToDVI = 4,
-  ovrDisplayDongle_ActiveDPToHDMI = 5,
-  ovrDisplayDongle_ActiveDPToVGA = 6
-} ovrDisplayDongleType;
+typedef struct ovrQuatd_ {
+  double x, y, z, w;
+} ovrQuatd;
 
-typedef enum ovrHMDEventType_ {
-  OVR_HMD_EVENT_TYPE_DISPLAY_ATTACHED = 1,
-  OVR_HMD_EVENT_TYPE_DISPLAY_DETACHED = 2,
-
-  OVR_HMD_EVENT_TYPE_HMD_ATTACHED = 3,
-  OVR_HMD_EVENT_TYPE_HMD_AVAILABLE = 4, // TODO(Kaitlyn): Is this correct?
-  OVR_HMD_EVENT_TYPE_HMD_DETACHED = 5,
-
-  OVR_HMD_EVENT_TYPE_IAD_CHANGED = 9 // Fired when IPD is changed.
-} ovrHMDEventType;
+typedef struct ovrVector3d_ {
+  double x, y, z;
+} ovrVector3d;
 
 typedef struct ovrGraphicsLuid_ {
   char Reserved[8];
 } ovrGraphicsLuid;
 
-typedef struct ovrDisplayProperties_ {
-  ovrGraphicsLuid Luid;
-  ovrDisplayOutputType OutputType;
-  ovrDisplayDongleType DongleType;
-  uint64_t UniqueId;
-  char EdidData[0x100];
-} ovrDisplayProperties;
+typedef struct ovrPosed_ {
+  ovrQuatd Orientation;
+  ovrVector3d Position;
+} ovrPosed;
 
-typedef struct ovrModeDesc_ {
-  ovrSizei Resolution;
-  DXGI_RATIONAL RefreshRate;
-  ovrTextureFormat Format;
-  char Reserved[4]; // TODO(Kaitlyn): Is this actually reserved?
-} ovrModeDesc;
-
-typedef struct ovrPresentStats_ {
-  DXGI_RATIONAL RefreshRate;
-  // TODO(Kaitlyn): Reverse all of this sometime, no clue what any of this is.
-  // Maybe stuff from IDXGISwapChain::GetFrameStatistics?
-  uint64_t Reserved1;
-  uint64_t Reserved2;
-  uint64_t Reserved3;
-  uint64_t Reserved4;
-  uint64_t Reserved5;
-  uint64_t Reserved6;
-} ovrPresentStats;
-
-typedef struct ovrInterfaceDesc_ {
-  uint64_t ClassId;
-  char ClassName[0x40];
-  uint64_t InterfaceId;
-  // TODO(Kaitlyn): Probably not actually reserved, reverse this later.
-  uint64_t Reserved1;
-  uint64_t Reserved2;
-  uint64_t Reserved3;
-} ovrInterfaceDesc;
-
-typedef class ovrPoseState_ {
-public:
-  double OrientationX;
-  double OrientationY;
-  double OrientationZ;
-  double OrientationW;
-  double PositionX;
-  double PositionY;
-  double PositionZ;
-  double AngularVelocityX;
-  double AngularVelocityY;
-  double AngularVelocityZ;
-  double LinearVelocityX;
-  double LinearVelocityY;
-  double LinearVelocityZ;
-  double AngularAccelerationX;
-  double AngularAccelerationY;
-  double AngularAccelerationZ;
-  double LinearAccelerationX;
-  double LinearAccelerationY;
-  double LinearAccelerationZ;
+typedef class ovrPoseStated_ {
+  ovrPosed ThePose;
+  ovrVector3d AngularVelocity;
+  ovrVector3d LinearVelocity;
+  ovrVector3d AngularAcceleration;
+  ovrVector3d LinearAcceleration;
   double TimeInSeconds;
-} ovrPoseState;
+} ovrPoseStated;

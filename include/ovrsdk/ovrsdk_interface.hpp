@@ -17,6 +17,16 @@
       } \
     }
 
+typedef struct ovrInterfaceDesc_ {
+  uint64_t ClassId;
+  char ClassName[0x40];
+  uint64_t InterfaceId;
+  // TODO(Kaitlyn): Probably not actually reserved, reverse this later.
+  uint64_t Reserved1;
+  uint64_t Reserved2;
+  uint64_t Reserved3;
+} ovrInterfaceDesc;
+
 namespace OVRInterface {
 
 class IRefCounted {

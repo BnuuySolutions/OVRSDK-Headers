@@ -6,6 +6,24 @@
 namespace OVR {
 namespace HeadsetPlugin {
 
+typedef enum ovrDeviceType_ {
+  OVR_DEVICE_TYPE_HMD = 0,
+  OVR_DEVICE_TYPE_LEFT_TOUCH = 1,
+  OVR_DEVICE_TYPE_RIGHT_TOUCH = 2,
+  OVR_DEVICE_TYPE_TRACKED_OBJECT_0 = 3
+} ovrDeviceType;
+
+typedef enum ovrHMDEventType_ {
+  OVR_HMD_EVENT_TYPE_DISPLAY_ATTACHED = 1,
+  OVR_HMD_EVENT_TYPE_DISPLAY_DETACHED = 2,
+
+  OVR_HMD_EVENT_TYPE_HMD_ATTACHED = 3,
+  OVR_HMD_EVENT_TYPE_HMD_AVAILABLE = 4, // TODO(Kaitlyn): Is this correct?
+  OVR_HMD_EVENT_TYPE_HMD_DETACHED = 5,
+
+  OVR_HMD_EVENT_TYPE_IAD_CHANGED = 9 // Fired when IPD is changed.
+} ovrHMDEventType;
+
 typedef struct ovrDisplay_ {
   char UniqueId[0x100];
   uint16_t PnpId;
@@ -79,7 +97,7 @@ public:
   // 1 = Left touch
   // 2 = Right touch
   // Also, the function name is a guess.
-  virtual void PoseEvent(int a2, ovrPoseState* pose, uint32_t a4) = 0;
+  virtual void DevicePoseEvent(ovrDeviceType deviceType, ovrPoseStated* devicePose, uint32_t a4) = 0;
 
   virtual void IHeadsetToRuntimeInterface_Unk33() {}
   virtual void IHeadsetToRuntimeInterface_Unk34() {}

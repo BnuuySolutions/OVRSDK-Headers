@@ -1,5 +1,7 @@
 #pragma once
 
+// Header which includes all of our other headers.
+
 #include "ovrsdk_types.hpp"
 #include "ovrsdk_support.hpp"
 #include "ovrsdk_interface.hpp"
