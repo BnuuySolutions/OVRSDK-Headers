@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OVR_Types.h"
+#include "ovrsdk_types.hpp"
 #include <atomic>
 #include <vector>
 

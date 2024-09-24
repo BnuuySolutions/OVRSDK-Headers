@@ -1,7 +1,7 @@
 #pragma once
 
-#include "OVR_Types.h"
-#include "OVR_Interface.h"
+#include "ovrsdk_types.hpp"
+#include "ovrsdk_interface.hpp"
 
 namespace OVR {
 
