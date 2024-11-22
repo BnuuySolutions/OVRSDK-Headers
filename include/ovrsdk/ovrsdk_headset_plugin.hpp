@@ -48,17 +48,16 @@ typedef struct ovrDisplayList_ {
 
 class IHeadsetToRuntimeInterface : public OVRInterface::IUnknown {
 public:
-  // Some HMD thing, takes in an HMD serial number?
-  // These functions seem to be related to eachother.
-  virtual void IHeadsetToRuntimeInterface_Unk05(const char* serialNumber) {}
-  virtual void IHeadsetToRuntimeInterface_Unk06() {}
-  virtual void IHeadsetToRuntimeInterface_Unk07() {}
+  virtual void IHeadsetToRuntimeInterface_Unk05() {} // nullsub
+  virtual void IHeadsetToRuntimeInterface_Unk06() {} // nullsub
+  virtual void IHeadsetToRuntimeInterface_Unk07() {} // nullsub (but has an implementation that returns 0 in OVRService)
+  virtual void IHeadsetToRuntimeInterface_Unk08() {} // nullsub
 
-  virtual void IHeadsetToRuntimeInterface_Unk08() {} // Not implemented in OVRServer?
-
-  // Both appear to call into OAF InputEvent?
-  virtual void IHeadsetToRuntimeInterface_Unk09(uint32_t a2, const char* serialNumber, uint32_t a4) {}
-  virtual void IHeadsetToRuntimeInterface_Unk10(uint32_t a2, const char* serialNumber, __int64 a4) {}
+  // TODO: Figure this out, both appear to do some input thing?
+  virtual void IHeadsetToRuntimeInterface_Unk09(uint32_t a2, const char* serialNumber, uint32_t a4) {
+  }
+  virtual void IHeadsetToRuntimeInterface_Unk10(uint32_t a2, const char* serialNumber, __int64 a4) {
+  }
 
   // Appears to be related to HMDEvent?
   virtual void IHeadsetToRuntimeInterface_Unk11(uint32_t a2, const char* serialNumber, uint32_t eventType, void* a5) = 0;
@@ -120,8 +119,8 @@ public:
   virtual void IHeadsetToRuntimeInterface_Unk48() {}
   virtual void IHeadsetToRuntimeInterface_Unk49() {}
   virtual void IHeadsetToRuntimeInterface_Unk50() {}
-  virtual void IHeadsetToRuntimeInterface_Unk51() {}
-  virtual void IHeadsetToRuntimeInterface_Unk52() {}
+  virtual int IHeadsetToRuntimeInterface_Unk51() { return 1; }
+  virtual int IHeadsetToRuntimeInterface_Unk52() { return 1; }
   virtual void IHeadsetToRuntimeInterface_Unk53() {}
   virtual void IHeadsetToRuntimeInterface_Unk54() {}
   virtual void IHeadsetToRuntimeInterface_Unk55() {}
@@ -131,7 +130,9 @@ public:
   virtual void IHeadsetToRuntimeInterface_Unk59() {}
   virtual void IHeadsetToRuntimeInterface_Unk60() {}
   virtual void IHeadsetToRuntimeInterface_Unk61() {}
-  virtual void IHeadsetToRuntimeInterface_Unk62() {}
+  virtual void IHeadsetToRuntimeInterface_Unk62(int a2, char a3, char a4) {
+    //printf("a2 = %i, a3 = %i, a4 = %i\n", a2, a3, a4);
+  }
   virtual void IHeadsetToRuntimeInterface_Unk63() {}
   virtual void IHeadsetToRuntimeInterface_Unk64() {}
   virtual void IHeadsetToRuntimeInterface_Unk65() {}

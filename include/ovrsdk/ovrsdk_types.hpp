@@ -81,7 +81,7 @@ typedef struct ovrPosed_ {
   ovrVector3d Position;
 } ovrPosed;
 
-typedef class ovrPoseStated_ {
+typedef struct ovrPoseStated_ {
   ovrPosed ThePose;
   ovrVector3d AngularVelocity;
   ovrVector3d LinearVelocity;
