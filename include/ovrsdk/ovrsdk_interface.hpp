@@ -21,13 +21,13 @@
   class OVRInterfaceFactory##clazz : public OVRInterface::IInterfaceFactory { \
     OVR_INTERFACE_IREFCOUNTED_IMPL \
   public: \
-    void* QueryInterface(uint64_t iid) { \
+    void* QueryInterface(uint64_t iid) override { \
       if (iid - 1 <= 2) { \
         return (OVRInterface::IInterfaceFactory*)this; \
       } \
       return nullptr; \
     } \
-    void* GetInterface(void** outInterface, uint64_t classId) { \
+    void* GetInterface(void** outInterface, uint64_t classId) override { \
       if (classId == clazzId) { \
         *outInterface = new clazz; \
         return outInterface; \
@@ -92,14 +92,14 @@ private:
   std::vector<ovrInterfaceDesc2> Interfaces = {};
 
 public:
-  void* QueryInterface(uint64_t iid) {
+  void* QueryInterface(uint64_t iid) override {
     if (iid - 1 <= 3) {
       return this;
     }
     return nullptr;
   }
 
-  void* GetInterface(void** outInterface, uint64_t classId) {
+  void* GetInterface(void** outInterface, uint64_t classId) override {
     for (auto it = Interfaces.begin(); it != Interfaces.end(); it++) {
       if (it->Desc.ClassId == classId) {
         it->Factory->GetInterface(&*outInterface, classId);
@@ -111,7 +111,7 @@ public:
     return outInterface;
   }
 
-  ovrBool IAggregateInterfaceFactory_Unk06(__int64* count, ovrInterfaceDesc* a3, uint64_t iid) {
+  ovrBool IAggregateInterfaceFactory_Unk06(__int64* count, ovrInterfaceDesc* a3, uint64_t iid) override {
     __int64 v4 = *count;
     *count = 0LL;
 
@@ -149,7 +149,7 @@ public:
     return ovrFalse;
   }
 
-  void RegisterInterface(IInterfaceFactory* factory, ovrInterfaceDesc* desc) {
+  void RegisterInterface(IInterfaceFactory* factory, ovrInterfaceDesc* desc) override {
     ovrInterfaceDesc2 interfaceDesc{};
     interfaceDesc.Factory = factory;
     interfaceDesc.Desc = *desc;
