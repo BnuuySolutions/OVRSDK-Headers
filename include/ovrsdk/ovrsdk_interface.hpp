@@ -17,6 +17,26 @@
       } \
     }
 
+#define OVR_INTERFACE_FACTORY(clazz, clazzId) \
+  class OVRInterfaceFactory##clazz : public OVRInterface::IInterfaceFactory { \
+    OVR_INTERFACE_IREFCOUNTED_IMPL \
+  public: \
+    void* QueryInterface(uint64_t iid) { \
+      if (iid - 1 <= 2) { \
+        return (OVRInterface::IInterfaceFactory*)this; \
+      } \
+      return nullptr; \
+    } \
+    void* GetInterface(void** outInterface, uint64_t classId) { \
+      if (classId == clazzId) { \
+        *outInterface = new clazz; \
+        return outInterface; \
+      } \
+      *outInterface = 0; \
+      return outInterface; \
+    } \
+  }
+
 typedef struct ovrInterfaceDesc_ {
   uint64_t ClassId;
   char ClassName[0x40];
