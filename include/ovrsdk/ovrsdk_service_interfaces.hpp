@@ -11,3 +11,8 @@ class IOVRCrashDump : public OVRInterface::IUnknown {
 public:
   virtual void IOVRCrashDump_Unk05() {}
 };
+
+class IOVRTelemetry : public OVRInterface::IUnknown {
+public:
+  virtual void IOVRTelemetry_Unk05() {}
+};
