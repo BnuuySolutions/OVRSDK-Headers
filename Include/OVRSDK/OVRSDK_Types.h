@@ -48,7 +48,7 @@ struct OvrInterfaceDesc {
   u64 class_id;
   char class_name[0x40];
   u64 interface_id_0; // you should always assign to this one, regardless.
-  // note(whatdahopper): no clue what these are for, but its always checked against interface id.
+  // note(whatdahopper): no clue what these are for, but its always checked against interface id
   u64 interface_id_1;
   u64 interface_id_2;
   u64 interface_id_3;

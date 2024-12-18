@@ -30,10 +30,10 @@ public:
   /* Gets interface descriptors by an interface ID.
    * You must pass in an array and its size which will be outputted to for its final result.
    */
-  virtual bool GetInterfaceDescriptors(u64* desc_arr_size, OvrInterfaceDesc desc_arr[], u64 iid) = 0; /* hint(reverse-engineering): function name guessed */
-  virtual void RegisterInterfaceFactory(IInterfaceFactory* factory, OvrInterfaceDesc* desc) = 0; /* hint(reverse-engineering): function name guessed */
+  virtual bool GetInterfaceDescriptors(u64* desc_arr_size, OvrInterfaceDesc desc_arr[], u64 iid) = 0; // hint(reverse-engineering): function name guessed
+  virtual void RegisterInterfaceFactory(IInterfaceFactory* factory, OvrInterfaceDesc* desc) = 0; // hint(reverse-engineering): function name guessed
   
-  /* todo(whatdahopper): stubbed for now */
+  // todo(whatdahopper): stubbed for now
 
   virtual void IAggregateInterfaceFactory_Unk08() {}
   virtual void IAggregateInterfaceFactory_Unk09() {}

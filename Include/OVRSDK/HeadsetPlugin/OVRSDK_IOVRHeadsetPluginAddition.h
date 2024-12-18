@@ -35,7 +35,7 @@ public:
    */
   virtual bool CreateHeadsetInterface(
     IHeadsetToRuntimeInterface2** runtime_interface,
-    IHeadsetInterface** out_headset_interface) = 0; /* hint(reverse-engineering): function name guessed */
+    IHeadsetInterface** out_headset_interface) = 0; // hint(reverse-engineering): function name guessed
 };
 
 } // HeadsetPlugin

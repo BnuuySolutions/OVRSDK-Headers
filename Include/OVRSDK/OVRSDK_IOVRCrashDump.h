@@ -25,7 +25,7 @@
 
 class IOVRCrashDump : public OVRInterface::IUnknown {
 public:
-  virtual void IOVRCrashDump_Stub05() {} /* hint(reverse-engineering): stub */
+  virtual void IOVRCrashDump_Stub05() {} // hint(reverse-engineering): stub
 };
 
 static const u64 IID_IOVRCrashDump = 0xC223699272206867;

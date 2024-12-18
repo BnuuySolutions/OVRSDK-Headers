@@ -27,7 +27,7 @@ namespace OVRInterface {
 
 class IUnknown : public IRefCounted {
 public:
-  virtual void* QueryInterface(u64 iid) = 0; /* hint(reverse-engineering): function name guessed */
+  virtual void* QueryInterface(u64 iid) = 0; // hint(reverse-engineering): function name guessed
 };
 
 } // OVRInterface

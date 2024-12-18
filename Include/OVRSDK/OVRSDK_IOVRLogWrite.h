@@ -25,7 +25,7 @@
 
 class IOVRLogWrite : public OVRInterface::IUnknown {
 public:
-  virtual void Log(OvrLogLevel level, const char* subsystem, const char* msg) = 0; /* hint(reverse-engineering): function name guessed */
+  virtual void Log(OvrLogLevel level, const char* subsystem, const char* msg) = 0; // hint(reverse-engineering): function name guessed
 };
 
 static const uint64_t IID_IOVRLogWrite = 0xB00B00044683AB0;

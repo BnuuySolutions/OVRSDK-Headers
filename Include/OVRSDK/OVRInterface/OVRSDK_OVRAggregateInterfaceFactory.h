@@ -26,12 +26,12 @@
 
 namespace OVRInterface {
 
-// fixme(whatdahopper): this class is poorly RE'd and barely works.
+// fixme(whatdahopper): this class is poorly RE'd and barely works
+  
 class OVRAggregateInterfaceFactory : public IAggregateInterfaceFactory {
   OVRSDK_IREFCOUNTED_IMPL
 
 private:
-  // no clue what this is actually called.
   struct OvrInterfaceDesc2 {
     IInterfaceFactory* factory;
     OvrInterfaceDesc desc;

@@ -47,7 +47,7 @@ namespace OVRInterface {
 
 class IInterfaceFactory : public IUnknown {
 public:
-  virtual void* CreateInterface(void** out_interface, u64 clsid) = 0; /* hint(reverse-engineering): function name guessed */
+  virtual void* CreateInterface(void** out_interface, u64 clsid) = 0; // hint(reverse-engineering): function name guessed
 };
 
 } // OVRInterface
