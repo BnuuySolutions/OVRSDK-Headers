@@ -58,9 +58,9 @@ public:
     return out_interface;
   }
 
-  bool GetInterfaceDescriptors(u64* desc_arr_count, OvrInterfaceDesc desc_arr[], u64 iid) override {
-    u64 initial_arr_count = *desc_arr_count;
-    *desc_arr_count = 0;
+  bool GetInterfaceDescriptors(u64* desc_arr_size, OvrInterfaceDesc desc_arr[], u64 iid) override {
+    u64 initial_arr_size = *desc_arr_size;
+    *desc_arr_size = 0;
 
     auto it = _desc_vec.begin();
     if (it == _desc_vec.end()) return true;
@@ -79,14 +79,14 @@ public:
       }
 
     increment_arr_count:
-      ++*desc_arr_count;
+      ++*desc_arr_size;
 
     iterate_vector:
       if (++it == _desc_vec.end()) return true;
     }
 
-    if (*desc_arr_count != initial_arr_count) {
-      desc_arr[*desc_arr_count] = (*it).desc;
+    if (*desc_arr_size != initial_arr_size) {
+      desc_arr[*desc_arr_size] = (*it).desc;
       goto increment_arr_count;
     }
     return false;

@@ -25,8 +25,7 @@
 
 class IOVRTelemetry : public OVRInterface::IUnknown {
 public:
-  /* hint(reverse-engineering): stub */
-  virtual void IOVRTelemetry_Stub05() {}
+  virtual void IOVRTelemetry_Stub05() {} /* hint(reverse-engineering): stub */
 };
 
 static const u64 IID_IOVRTelemetry = 0xB00B00088073380;

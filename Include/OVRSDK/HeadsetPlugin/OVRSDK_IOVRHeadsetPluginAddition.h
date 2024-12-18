@@ -29,13 +29,13 @@ namespace HeadsetPlugin {
 
 class IOVRHeadsetPluginAddition : public OVRInterface::IUnknown {
 public:
-  // Creates an IHeadsetInterface from the headset plugin, allowing you to query information about connected headsets, etc.
-  // You must pass in a runtime interface, which the headset plugin will use to interface with the runtime.
-  // Returns "true" if successful, "false" if not.
-  /* hint(reverse-engineering): function name guessed */
+  /* Creates an IHeadsetInterface from the headset plugin, allowing you to query information about connected headsets, etc.
+   * You must pass in a runtime interface, which the headset plugin will use to interface with the runtime.
+   * Returns "true" if successful, "false" if not.
+   */
   virtual bool CreateHeadsetInterface(
     IHeadsetToRuntimeInterface2** runtime_interface,
-    IHeadsetInterface** out_headset_interface) = 0;
+    IHeadsetInterface** out_headset_interface) = 0; /* hint(reverse-engineering): function name guessed */
 };
 
 } // HeadsetPlugin

@@ -43,9 +43,7 @@ public:
 
   virtual void AddRef() = 0;
   virtual void Release() = 0;
-
-  /* hint(reverse-engineering): function name guessed */
-  virtual void Destroy() { delete this; }
+  virtual void Destroy() { delete this; } /* hint(reverse-engineering): function name guessed */
 };
 
 } // OVRInterface

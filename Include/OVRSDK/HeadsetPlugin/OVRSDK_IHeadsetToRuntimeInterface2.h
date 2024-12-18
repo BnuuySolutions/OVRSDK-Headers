@@ -27,8 +27,7 @@ namespace OVR {
 namespace HeadsetPlugin {
 
 // Used for headset plugin -> runtime interfacing.
-/* hint(reverse-engineering): vtable start cannot be determined */
-class IHeadsetToRuntimeInterface2 : public IHeadsetToRuntimeInterface {};
+class IHeadsetToRuntimeInterface2 : public IHeadsetToRuntimeInterface {}; /* hint(reverse-engineering): vtable start cannot be determined */
 
 } // HeadsetPlugin
 } // OVR
