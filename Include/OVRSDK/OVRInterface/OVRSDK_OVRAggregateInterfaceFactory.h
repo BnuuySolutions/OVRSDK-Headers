@@ -27,7 +27,7 @@
 namespace OVRInterface {
 
 // fixme(whatdahopper): this class is poorly RE'd and barely works
-  
+
 class OVRAggregateInterfaceFactory : public IAggregateInterfaceFactory {
   OVRSDK_IREFCOUNTED_IMPL
 
@@ -93,10 +93,10 @@ public:
   }
 
   void RegisterInterfaceFactory(IInterfaceFactory* factory, OvrInterfaceDesc* desc) override {
-    OvrInterfaceDesc2 new_desc{};
-    new_desc.factory = factory;
-    new_desc.desc = *desc;
-    _desc_vec.push_back(new_desc);
+    _desc_vec.push_back({
+      .factory = factory,
+      .desc = *desc
+    });
   }
 };
 

@@ -21,22 +21,10 @@
 // SOFTWARE.
 #pragma once
 
-#include "OVRSDK_Types.h"
-#include "OVRSDK_IGatekeeper.h"
-#include "OVRSDK_IOVRCrashDump.h"
-#include "OVRSDK_IOVRLogWrite.h"
-#include "OVRSDK_IOVRTelemetry.h"
+#include "OVRSDK_OVRAggregateInterfaceFactory.h"
 
-// OVRInterface
-#include "OVRInterface/OVRSDK_IRefCounted.h"
-#include "OVRInterface/OVRSDK_IUnknown.h"
-#include "OVRInterface/OVRSDK_IInterfaceFactory.h"
-#include "OVRInterface/OVRSDK_IAggregateInterfaceFactory.h"
-#include "OVRInterface/OVRSDK_OVRAggregateInterfaceFactory.h"
-#include "OVRInterface/OVRSDK_OVRInterfaceManager.h"
+namespace OVRInterface {
 
-// HeadsetPlugin
-#include "HeadsetPlugin/OVRSDK_IHeadsetInterface.h"
-#include "HeadsetPlugin/OVRSDK_IHeadsetToRuntimeInterface.h"
-#include "HeadsetPlugin/OVRSDK_IHeadsetToRuntimeInterface2.h"
-#include "HeadsetPlugin/OVRSDK_IOVRHeadsetPluginAddition.h"
+class OVRInterfaceManager : public OVRAggregateInterfaceFactory {};
+
+} // OVRInterface
