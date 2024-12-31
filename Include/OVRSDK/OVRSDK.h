@@ -22,10 +22,12 @@
 #pragma once
 
 #include "OVRSDK_Types.h"
+#include "OVRSDK_IOVRString.h"
 #include "OVRSDK_IGatekeeper.h"
 #include "OVRSDK_IOVRCrashDump.h"
 #include "OVRSDK_IOVRLogWrite.h"
 #include "OVRSDK_IOVRTelemetry.h"
+#include "OVRSDK_IOVRTimeCriticalTelemetry.h"
 
 // OVRInterface
 #include "OVRInterface/OVRSDK_IRefCounted.h"

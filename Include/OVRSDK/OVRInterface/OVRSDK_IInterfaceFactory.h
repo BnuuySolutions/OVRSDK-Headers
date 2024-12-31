@@ -33,13 +33,13 @@
       } \
       return nullptr; \
     } \
-    void* CreateInterface(void** out_interface, u64 clsid) override { \
+    void* CreateInterface(void** out_Interface, u64 clsid) override { \
       if (clsid == ##clsid_) { \
-        *out_interface = new clazz; \
-        return out_interface; \
+        *out_Interface = new clazz; \
+        return out_Interface; \
       } \
-      *out_interface = 0; \
-      return out_interface; \
+      *out_Interface = 0; \
+      return out_Interface; \
     } \
   }
 
@@ -47,7 +47,7 @@ namespace OVRInterface {
 
 class IInterfaceFactory : public IUnknown {
 public:
-  virtual void* CreateInterface(void** out_interface, u64 clsid) = 0; // hint(reverse-engineering): function name guessed
+  virtual void* CreateInterface(void** out_Interface, u64 clsid) = 0; // hint(reverse-engineering): function name guessed
 };
 
 } // OVRInterface

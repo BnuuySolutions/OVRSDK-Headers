@@ -23,9 +23,9 @@
 
 #include "OVRInterface/OVRSDK_IUnknown.h"
 
-class IOVRCrashDump : public OVRInterface::IUnknown {
+class IOVRTimeCriticalTelemetry : public OVRInterface::IUnknown {
 public:
-  virtual void IOVRCrashDump_StubFunc05() {} // hint(reverse-engineering): stub
+  virtual void IOVRTimeCriticalTelemetry_StubFunc05() {} // hint(reverse-engineering): stub
 };
 
-static const u64 IID_IOVRCrashDump = 0xC223699272206867;
+static const u64 IID_IOVRTimeCriticalTelemetry = 0xB00B00088073382;

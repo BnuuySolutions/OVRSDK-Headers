@@ -23,9 +23,10 @@
 
 #include "OVRInterface/OVRSDK_IUnknown.h"
 
-class IOVRCrashDump : public OVRInterface::IUnknown {
+class IOVRString : public OVRInterface::IUnknown {
 public:
-  virtual void IOVRCrashDump_StubFunc05() {} // hint(reverse-engineering): stub
+  virtual u64 GetSize() = 0;
+  virtual char* ToCStr() = 0;
 };
 
-static const u64 IID_IOVRCrashDump = 0xC223699272206867;
+static const u64 IID_IOVRString = 0x15;

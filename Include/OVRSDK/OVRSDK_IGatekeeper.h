@@ -25,7 +25,7 @@
 
 class IGatekeeper : public OVRInterface::IUnknown {
 public:
-  virtual u8 FetchGatekeeper(const char* gk_name) = 0;
+  virtual u8 FetchGatekeeper(const char* gkName) = 0;
 };
 
 static const u64 IID_IGatekeeper = 0x32AA1AA5EF7D2559;

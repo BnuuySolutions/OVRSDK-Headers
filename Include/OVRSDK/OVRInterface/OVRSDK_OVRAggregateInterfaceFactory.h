@@ -26,77 +26,70 @@
 
 namespace OVRInterface {
 
-// fixme(whatdahopper): this class is poorly RE'd and barely works
-
+// FIXME(whatdahopper): This class is poorly RE'd and barely works.
 class OVRAggregateInterfaceFactory : public IAggregateInterfaceFactory {
   OVRSDK_IREFCOUNTED_IMPL
 
 private:
-  struct OvrInterfaceDesc2 {
+  typedef struct ovrFactoryDesc_ {
     IInterfaceFactory* factory;
-    OvrInterfaceDesc desc;
-  };
-  std::vector<OvrInterfaceDesc2> _desc_vec{};
+    ovrInterfaceDesc desc;
+  } ovrFactoryDesc;
+  std::vector<ovrFactoryDesc> m_factories = {};
 
 public:
   void* QueryInterface(u64 iid) override {
-    if (iid - 1 <= 3) {
-      return this;
-    }
+    if (iid - 1 <= 3) return this;
     return nullptr;
   }
 
-  void* CreateInterface(void** out_interface, u64 clsid) override {
-    for (auto it = _desc_vec.begin(); it != _desc_vec.end(); it++) {
-      if (it->desc.class_id == clsid) {
-        it->factory->CreateInterface(&*out_interface, clsid);
-        return out_interface;
+  void* CreateInterface(void** out_Interface, u64 clsid) override {
+    for (auto it = m_factories.begin(); it != m_factories.end(); it++) {
+      if (it->desc.ClassId == clsid) {
+        it->factory->CreateInterface(&*out_Interface, clsid);
+        return out_Interface;
       }
     }
 
-    *out_interface = 0;
-    return out_interface;
+    *out_Interface = 0;
+    return out_Interface;
   }
 
-  bool GetInterfaceDescriptors(u64* desc_arr_size, OvrInterfaceDesc desc_arr[], u64 iid) override {
-    u64 initial_arr_size = *desc_arr_size;
-    *desc_arr_size = 0;
+  bool GetInterfaceDescriptors(u64* out_Length, ovrInterfaceDesc arr[], u64 iid) override {
+    u64 length = *out_Length;
+    *out_Length = 0;
 
-    auto it = _desc_vec.begin();
-    if (it == _desc_vec.end()) return true;
+    auto it = m_factories.begin();
+    if (it == m_factories.end()) return true;
 
     while (true) {
       if (iid != -1 &&
-          (*it).desc.interface_id_0 != iid &&
-          (*it).desc.interface_id_1 != iid &&
-          (*it).desc.interface_id_2 != iid &&
-          (*it).desc.interface_id_3 != iid) {
-        goto iterate_vector;
+          (*it).desc.InterfaceId0 != iid &&
+          (*it).desc.InterfaceId1 != iid &&
+          (*it).desc.InterfaceId2 != iid &&
+          (*it).desc.InterfaceId3 != iid) {
+        goto IterateVector;
       }
 
-      if (desc_arr) {
-        break;
-      }
+      if (arr) break;
 
-    increment_arr_count:
-      ++*desc_arr_size;
+    IncrementLength:
+      ++*out_Length;
 
-    iterate_vector:
-      if (++it == _desc_vec.end()) return true;
+    IterateVector:
+      if (++it == m_factories.end()) return true;
     }
 
-    if (*desc_arr_size != initial_arr_size) {
-      desc_arr[*desc_arr_size] = (*it).desc;
-      goto increment_arr_count;
+    if (*out_Length != length) {
+      arr[*out_Length] = (*it).desc;
+      goto IncrementLength;
     }
+
     return false;
   }
 
-  void RegisterInterfaceFactory(IInterfaceFactory* factory, OvrInterfaceDesc* desc) override {
-    _desc_vec.push_back({
-      .factory = factory,
-      .desc = *desc
-    });
+  void RegisterFactory(IInterfaceFactory* factory, ovrInterfaceDesc* desc) override {
+    m_factories.push_back({ .factory = factory, .desc = *desc });
   }
 };
 
