@@ -47,8 +47,8 @@ public:
   virtual void IHeadsetInterface_UnkFunc18() = 0;
   virtual void IHeadsetInterface_UnkFunc19() = 0;
   virtual void IHeadsetInterface_UnkFunc20() = 0;
-  virtual void IHeadsetInterface_UnkFunc21() = 0; // vibration related thing?
-  virtual void IHeadsetInterface_UnkFunc22() = 0; // sends vibration frequency to controller?
+  virtual b8 GetControllerVibrationState(u32 deviceType, s32* out_RemainingQueueSpace, s32 out_SamplesQueued) = 0;
+  virtual void SetControllerVibration(u32 deviceType, f32 frequency, f32 amplitude) = 0; // Closely matches ovr_SetControllerVibration in CAPI.
   virtual void IHeadsetInterface_UnkFunc23() = 0; // sends vibration buffer to controller?
   virtual void IHeadsetInterface_NullsubFunc24() {} // vibrates both controllers?
   virtual void WakeFromStandby() = 0;
