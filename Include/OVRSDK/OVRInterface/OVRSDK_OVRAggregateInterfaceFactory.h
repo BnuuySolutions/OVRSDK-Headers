@@ -32,10 +32,10 @@ class OVRAggregateInterfaceFactory : public IAggregateInterfaceFactory {
 
 private:
   typedef struct ovrFactoryDesc_ {
-    IInterfaceFactory* factory;
-    ovrInterfaceDesc desc;
+    IInterfaceFactory* Factory;
+    ovrInterfaceDesc Desc;
   } ovrFactoryDesc;
-  std::vector<ovrFactoryDesc> m_factories = {};
+  std::vector<ovrFactoryDesc> Factories = {};
 
 public:
   void* QueryInterface(u64 iid) override {
@@ -44,9 +44,9 @@ public:
   }
 
   void* CreateInterface(void** out_Interface, u64 clsid) override {
-    for (auto it = m_factories.begin(); it != m_factories.end(); it++) {
-      if (it->desc.ClassId == clsid) {
-        it->factory->CreateInterface(&*out_Interface, clsid);
+    for (auto it = Factories.begin(); it != Factories.end(); it++) {
+      if (it->Desc.ClassId == clsid) {
+        it->Factory->CreateInterface(&*out_Interface, clsid);
         return out_Interface;
       }
     }
@@ -59,15 +59,15 @@ public:
     u64 length = *out_Length;
     *out_Length = 0;
 
-    auto it = m_factories.begin();
-    if (it == m_factories.end()) return true;
+    auto it = Factories.begin();
+    if (it == Factories.end()) return true;
 
     while (true) {
       if (iid != -1 &&
-          (*it).desc.InterfaceId0 != iid &&
-          (*it).desc.InterfaceId1 != iid &&
-          (*it).desc.InterfaceId2 != iid &&
-          (*it).desc.InterfaceId3 != iid) {
+          (*it).Desc.InterfaceId0 != iid &&
+          (*it).Desc.InterfaceId1 != iid &&
+          (*it).Desc.InterfaceId2 != iid &&
+          (*it).Desc.InterfaceId3 != iid) {
         goto IterateVector;
       }
 
@@ -77,11 +77,11 @@ public:
       ++*out_Length;
 
     IterateVector:
-      if (++it == m_factories.end()) return true;
+      if (++it == Factories.end()) return true;
     }
 
     if (*out_Length != length) {
-      arr[*out_Length] = (*it).desc;
+      arr[*out_Length] = (*it).Desc;
       goto IncrementLength;
     }
 
@@ -89,7 +89,7 @@ public:
   }
 
   void RegisterFactory(IInterfaceFactory* factory, ovrInterfaceDesc* desc) override {
-    m_factories.push_back({ .factory = factory, .desc = *desc });
+    Factories.push_back({ .Factory = factory, .Desc = *desc });
   }
 };
 

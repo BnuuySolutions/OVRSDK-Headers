@@ -26,13 +26,13 @@
 
 #define OVRSDK_IREFCOUNTED_IMPL \
   private: \
-    std::atomic<s32> _ref_count = {1}; \
+    std::atomic<s32> RefCount = {1}; \
   public: \
     void AddRef() override { \
-      _ref_count.fetch_add(1, std::memory_order_relaxed); \
+      RefCount.fetch_add(1, std::memory_order_relaxed); \
     } \
     void Release() override { \
-      if (_ref_count.fetch_add(-1, std::memory_order_relaxed) - 1 == 0) delete this; \
+      if (RefCount.fetch_add(-1, std::memory_order_relaxed) - 1 == 0) delete this; \
     }
 
 namespace OVRInterface {

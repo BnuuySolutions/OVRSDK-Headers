@@ -21,8 +21,9 @@
 // SOFTWARE.
 #pragma once
 
-#include <cmath>
+#include <dxgicommon.h>
 #include <cstdint>
+#include <cmath>
 
 #if defined(_WIN32)
 #define OVRSDK_EXPORT extern "C" __declspec(dllexport)
@@ -55,6 +56,12 @@ class IOVRString;
 
 /* Enums */
 
+typedef enum ovrErrorType_ {
+  ovrError_InvalidParameter = -1005,
+  ovrError_Unsupported = -1009,
+  ovrError_InsufficientArraySize = -1016
+} ovrErrorType;
+
 typedef enum ovrLogLevelType_ {
   ovrLogLevel_Disabled = 0,
   ovrLogLevel_Trace = 1,
@@ -79,6 +86,28 @@ typedef enum ovrTrackingCaps_ {
   ovrTrackingCap_EnumSize = 0x7fffffff
 } ovrTrackingCaps;
 
+typedef enum ovrHandType_ {
+  ovrHand_Left = 0,
+  ovrHand_Right = 1,
+  ovrHand_Count = 2,
+  ovrHand_EnumSize = 0x7fffffff
+} ovrHandType;
+
+typedef enum ovrCapsenseType_ {
+  ovrCapsense_Thumbstick = 0,
+  ovrCapsense_Button0 = 1, // Y button on Left touch, B button on Right touch
+  ovrCapsense_IndexTrigger = 2,
+  ovrCapsense_Button1 = 3, // X button on Left touch, A button on Right touch
+  ovrCapsense_Reserved0 = 4,
+  ovrCapsense_Reserved1 = 5,
+  ovrCapsense_Reserved2 = 6,
+  ovrCapsense_Thumbrest = 7,
+  ovrCapsense_Reserved4 = 8,
+  ovrCapsense_Reserved5 = 9,
+  ovrCapsense_Count = 10,
+  ovrCapsense_EnumSize = 0x7fffffff
+} ovrCapsenseType;
+
 /* Structs */
 
 typedef struct OVRSDK_ALIGNAS(4) ovrSizei_ {
@@ -91,6 +120,21 @@ typedef struct OVRSDK_ALIGNAS(4) ovrSizef_ {
 } ovrSizef;
 static_assert(sizeof(ovrSizef) == 0x8, "sizeof(ovrSizef) is not correct");
 
+typedef struct OVRSDK_ALIGNAS(8) ovrQuatd_ {
+  f64 x, y, z, w;
+} ovrQuatd;
+static_assert(sizeof(ovrQuatd) == 0x20, "sizeof(ovrQuatd) is not correct");
+
+typedef struct OVRSDK_ALIGNAS(8) ovrVector3d_ {
+  f64 x, y, z;
+} ovrVector3d;
+static_assert(sizeof(ovrVector3d) == 0x18, "sizeof(ovrVector3d) is not correct");
+
+typedef struct OVRSDK_ALIGNAS(4) ovrVector2f_ {
+  f32 x, y;
+} ovrVector2f;
+static_assert(sizeof(ovrVector2f) == 0x8, "sizeof(ovrVector2f) is not correct");
+
 typedef struct OVRSDK_ALIGNAS(8) ovrInterfaceDesc_ {
   u64 ClassId;
   char ClassName[0x40];
@@ -100,6 +144,58 @@ typedef struct OVRSDK_ALIGNAS(8) ovrInterfaceDesc_ {
   u64 InterfaceId3;
 } ovrInterfaceDesc;
 static_assert(sizeof(ovrInterfaceDesc) == 0x68, "sizeof(ovrInterfaceDesc) is not correct");
+
+typedef struct OVRSDK_ALIGNAS(4) ovrControllerState_ {
+  u32 Connected;
+  u8 BatteryLevel;
+  u8 ovrControllerState_UnkData0005[3];
+  u32 Buttons;
+  u16 Capsense[ovrCapsense_Count];
+  f32 IndexTrigger;
+  f32 HandTrigger;
+  ovrVector2f Thumbstick;
+  u32 ovrControllerState_UnkData0030[7];
+  f32 IndexTriggerNoDeadzone;
+  f32 HandTriggerNoDeadzone;
+  ovrVector2f ThumbstickNoDeadzone;
+  u32 ovrControllerState_UnkData005C[7];
+  f32 IndexTriggerRaw;
+  f32 HandTriggerRaw;
+  ovrVector2f ThumbstickRaw;
+  u32 ovrControllerState_UnkData0088[7];
+  u32 ovrControllerState_UnkVar00A4;
+} ovrControllerState;
+// TODO(whatdahopper): assert sizeof
+
+typedef struct OVRSDK_ALIGNAS(8) ovrCombinedControllerState_ {
+  u64 ovrLeftRightControllerState_UnkData[2];
+  ovrControllerState Controllers[ovrHand_Count];
+} ovrCombinedControllerState;
+// TODO(whatdahopper): assert sizeof
+
+typedef struct OVRSDK_ALIGNAS(8) ovrDisplayInfo_ {
+  char UniqueId[0x100];
+  u16 PnpId;
+  char DisplaySerial[0x40];
+  u16 ovrDisplayInfo_UnkVar0142;
+  ovrSizei Resolution0;
+  ovrSizei Resolution1; // Wtf? Why 2?
+  DXGI_RATIONAL RefreshRate;
+  u8 ovrDisplayInfo_UnkVar015C;
+  u8 Reserved0;
+  u16 Reserved1;
+  u64 Luid;
+  u32 ovrDisplayInfo_UnkVar0168;
+  u8 ovrDisplayInfo_UnkVar016C;
+} ovrDisplayInfo;
+// TODO(whatdahopper): assert sizeof
+
+typedef struct OVRSDK_ALIGNAS(8) ovrDisplayList_ {
+  u32 Count;
+  char ovrDisplayList_UnkData0004[0x2C]; // TODO(whatdahopper): Actually reserved or not?
+  ovrDisplayInfo* Display; // Fix hardcoded single display at some point.
+} ovrDisplayList;
+// TODO(whatdahopper): assert sizeof
 
 typedef struct OVRSDK_ALIGNAS(4) ovrScreenInfo_ {
   ovrSizei ResolutionInPixels;
@@ -223,3 +319,17 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u8 ovrHmdInfo_UnkVar0931;
 } ovrHmdInfo;
 static_assert(sizeof(ovrHmdInfo) == 0x938, "sizeof(ovrHmdInfo) is not correct");
+
+typedef struct ovrPosed_ {
+  ovrQuatd Orientation;
+  ovrVector3d Position;
+} ovrPosed;
+
+typedef class ovrPoseStated_ {
+  ovrPosed ThePose;
+  ovrVector3d AngularVelocity;
+  ovrVector3d LinearVelocity;
+  ovrVector3d AngularAcceleration;
+  ovrVector3d LinearAcceleration;
+  f64 TimeInSeconds;
+} ovrPoseStated;
