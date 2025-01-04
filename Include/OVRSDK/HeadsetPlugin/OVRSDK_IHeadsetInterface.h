@@ -36,20 +36,20 @@ public:
   virtual ovrPluginMode GetPluginMode() = 0;
   virtual void GetPluginName(IOVRString** out_PluginName) = 0;
   virtual void GetRuntimeInterface(IHeadsetToRuntimeInterface2** out_RuntimeInterface) = 0;
-  virtual void IHeadsetInterface_NullsubFunc10() {} // not nullsub on laguna, sets a value in instance.
-  virtual void IHeadsetInterface_NullsubFunc11() {} // not nullsub on laguna, sets a global byte value for a compat info thing.
-  virtual void IHeadsetInterface_UnkFunc12() = 0;
+  virtual void IHeadsetInterface_NullsubFunc10() {} // Not nullsub on RiftS, sets a value in instance.
+  virtual void IHeadsetInterface_NullsubFunc11() {} // Not nullsub on RiftS, sets a global byte value for compatibility info.
+  virtual void IHeadsetInterface_UnkFunc12(u8 a2) = 0; // Firmware update related
   virtual void GetInterface(u64 iid) = 0;
-  virtual void IHeadsetInterface_NullsubFunc14() {} // not nullsub on laguna
+  virtual void HmdReboot() = 0; // Not nullsub on Rift(S) (sets DeviceManagement)
   virtual void IHeadsetInterface_UnkFunc15() = 0;
-  virtual void IHeadsetInterface_UnkFunc16() = 0;
-  virtual void IHeadsetInterface_NullsubFunc17() {} // not nullsub on laguna
+  virtual u8 IHeadsetInterface_UnkFunc16(u64 a2, u8 a3) = 0; // Controller pairing related
+  virtual void IHeadsetInterface_UnkFunc17() = 0; // Not nullsub on Rift(S) (sets NormalApp)
   virtual void IHeadsetInterface_UnkFunc18() = 0;
   virtual void IHeadsetInterface_UnkFunc19() = 0;
-  virtual void IHeadsetInterface_UnkFunc20() = 0;
-  virtual b8 GetControllerVibrationState(u32 deviceType, s32* out_RemainingQueueSpace, s32 out_SamplesQueued) = 0;
-  virtual void SetControllerVibration(u32 deviceType, f32 frequency, f32 amplitude) = 0; // Closely matches ovr_SetControllerVibration in CAPI.
-  virtual void IHeadsetInterface_UnkFunc23() = 0; // sends vibration buffer to controller?
+  virtual void GetTouchHapticsDesc() = 0; // Closely matches ovr_GetTouchHapticsDesc in CAPI.
+  virtual b8 GetControllerVibrationState(s32 deviceType, s32* out_RemainingQueueSpace, s32 out_SamplesQueued) = 0; // True = Success, False = Failure
+  virtual b8 SetControllerVibration(s32 deviceType, f32 frequency, f32 amplitude) = 0; // Closely matches ovr_SetControllerVibration in CAPI.
+  virtual b8 SubmitControllerVibration(s32 deviceType, void* samples, s32 samplesCount) = 0;
   virtual void IHeadsetInterface_NullsubFunc24() {} // vibrates both controllers?
   virtual void WakeFromStandby() = 0;
   virtual void SetVirtualPose(char* deviceName) = 0; // TODO(whatdahopper): Rotation and position.
@@ -66,7 +66,7 @@ public:
   virtual void IHeadsetInterface_UnkFunc37() = 0;
   virtual void IHeadsetInterface_NullsubFunc38() {}
   virtual void IHeadsetInterface_NullsubFunc39() {}
-  virtual u64 GetControllerDeviceType(u32 a2) = 0;
+  virtual u64 GetControllerDeviceType(s32 controllerType) = 0;
   virtual void IHeadsetInterface_UnkFunc41() = 0;
   virtual void IHeadsetInterface_UnkFunc42() = 0;
   virtual void IHeadsetInterface_UnkFunc43() = 0;
@@ -74,7 +74,7 @@ public:
   virtual void IHeadsetInterface_UnkFunc45() = 0;
   virtual void IHeadsetInterface_UnkFunc46() = 0;
   virtual void IHeadsetInterface_UnkFunc47() = 0;
-  virtual void GetHMDInfo(ovrHmdInfo* out_HmdInfo) = 0; // todo
+  virtual void GetHmdInfo(ovrHmdInfo* out_HmdInfo) = 0; // todo
   virtual void IHeadsetInterface_UnkFunc49() = 0;
   virtual void IHeadsetInterface_UnkFunc50() = 0;
   virtual void IHeadsetInterface_UnkFunc51() = 0; // latency of something? returns 0 on rift and emulation
