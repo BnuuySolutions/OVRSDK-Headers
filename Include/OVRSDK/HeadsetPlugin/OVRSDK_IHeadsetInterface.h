@@ -63,16 +63,16 @@ public:
   virtual void IHeadsetInterface_UnkFunc34() = 0;
   virtual void IHeadsetInterface_UnkFunc35() = 0;
   virtual void IHeadsetInterface_UnkFunc36() = 0;
-  virtual void IHeadsetInterface_UnkFunc37() = 0;
-  virtual void IHeadsetInterface_NullsubFunc38() {}
-  virtual void IHeadsetInterface_NullsubFunc39() {}
+  virtual void IHeadsetInterface_UnkFunc37(IOVRString** out_a2, s32 deviceType) = 0; // Returns HMD serial?
+  virtual void IHeadsetInterface_UnkFunc38(IOVRString** out_a2) = 0; // Not nullsub on Rift, outputs JSON.
+  virtual void IHeadsetInterface_UnkFunc39(IOVRString** out_a2) = 0; // Not nullsub on Rift, outputs JSON.
   virtual u64 GetControllerDeviceType(s32 controllerType) = 0;
   virtual void IHeadsetInterface_UnkFunc41() = 0;
   virtual void IHeadsetInterface_UnkFunc42() = 0;
   virtual void IHeadsetInterface_UnkFunc43() = 0;
   virtual void IHeadsetInterface_UnkFunc44() = 0;
-  virtual void IHeadsetInterface_UnkFunc45() = 0;
-  virtual void IHeadsetInterface_UnkFunc46() = 0;
+  virtual void GetTrackerSerialNumber(u32 trackerIndex, IOVRString** out_SerialNumber) = 0;
+  virtual void IHeadsetInterface_UnkFunc46(u32 trackerIndex, IOVRString** out_a3) = 0; // Just returns "NONE", no clue.
   virtual void IHeadsetInterface_UnkFunc47() = 0;
   virtual void GetHmdInfo(ovrHmdInfo* out_HmdInfo) = 0; // todo
   virtual void IHeadsetInterface_UnkFunc49() = 0;
