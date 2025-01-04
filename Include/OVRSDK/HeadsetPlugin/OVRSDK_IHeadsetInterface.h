@@ -67,8 +67,8 @@ public:
   virtual void IHeadsetInterface_UnkFunc38(IOVRString** out_a2) = 0; // Not nullsub on Rift, outputs JSON.
   virtual void IHeadsetInterface_UnkFunc39(IOVRString** out_a2) = 0; // Not nullsub on Rift, outputs JSON.
   virtual u64 GetControllerDeviceType(s32 controllerType) = 0;
-  virtual void IHeadsetInterface_UnkFunc41() = 0;
-  virtual void IHeadsetInterface_UnkFunc42() = 0;
+  virtual s32 GetControllerBatteryLevel(s32 deviceType) = 0;
+  virtual void IHeadsetInterface_UnkFunc42(IOVRString** out_a2) = 0; // Returns hex values with spaces and a ";" to seperate them, no clue.
   virtual void IHeadsetInterface_UnkFunc43() = 0;
   virtual void IHeadsetInterface_UnkFunc44() = 0;
   virtual void GetTrackerSerialNumber(u32 trackerIndex, IOVRString** out_SerialNumber) = 0;
