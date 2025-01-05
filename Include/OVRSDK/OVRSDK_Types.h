@@ -174,14 +174,14 @@ typedef struct OVRSDK_ALIGNAS(8) ovrCombinedControllerState_ {
 // TODO(whatdahopper): assert sizeof
 
 typedef struct OVRSDK_ALIGNAS(8) ovrDisplayInfo_ {
-  char UniqueId[0x100];
-  u16 PnpId;
-  char DisplaySerial[0x40];
+  char DeviceName[0x100];
+  u16 EdidVendorId;
+  char EdidSerial[0x40];
   u16 ovrDisplayInfo_UnkVar0142;
   ovrSizei Resolution0;
   ovrSizei Resolution1; // Wtf? Why 2?
   DXGI_RATIONAL RefreshRate;
-  u8 ovrDisplayInfo_UnkVar015C;
+  b8 ApplicationOnlyMode;
   u8 Reserved0;
   u16 Reserved1;
   u64 Luid;
@@ -212,7 +212,7 @@ typedef struct OVRSDK_ALIGNAS(4) ovrShutterInfo_ {
   f32 FirstScanlineToLastScanline;
   f32 PixelSettleTime;
   f32 PixelPersistence;
-  u32 ovrShutterInfo_UnkVar0018; // Related to OverdriveScale?
+  b8 HasOverdriveOverride;
   f32 OverdriveScale[2];
   u32 ovrShutterInfo_UnkVar0024;
 } ovrShutterInfo;
@@ -253,8 +253,7 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u32 LatencyPixelPosition;
   u64 ovrHmdInfo_UnkData00C0[0x4D]; // A lot of info we're discarding here, we don't know what this is.
   b8 ovrHmdInfo_UnkVar0328;
-  u32 ovrHmdInfo_UnkVar032C;
-  u32 ovrHmdInfo_UnkVar0330;
+  ovrSizei FixedFovResolution;
   ovrShutterInfo Shutter;
   ovrLensConfig LensConfigurations[6];
   u32 ovrHmdInfo_UnkVar07DC;
@@ -267,10 +266,10 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   IOVRString* WindowsAudioId;
   IOVRString* ovrHmdInfo_UnkVar0848;
   IOVRString* DeviceSerial;
-  IOVRString* LeftScreenSerial;
-  IOVRString* RightScreenSerial;
-  IOVRString* ovrHmdInfo_UnkVar0868;
-  IOVRString* ovrHmdInfo_UnkVar0870;
+  IOVRString* LeftDisplaySerial;
+  IOVRString* RightDisplaySerial;
+  IOVRString* LeftLensSerial;
+  IOVRString* RightLensSerial;
   u8 ovrHmdInfo_UnkVar0878;
   IOVRString* ovrHmdInfo_UnkVar0880;
   u32 UsbVendorId;

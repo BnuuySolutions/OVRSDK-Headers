@@ -83,7 +83,7 @@ public:
   virtual void IHeadsetInterface_UnkFunc54() = 0;
   virtual void SetTrackingCaps(u32 trackingCaps) = 0;
   virtual void IHeadsetInterface_UnkFunc56() = 0;
-  virtual void IHeadsetInterface_UnkFunc57() = 0;
+  virtual void GetDisplayInfo(ovrDisplayInfo* out_DisplayInfo) = 0;
   virtual void IHeadsetInterface_UnkFunc58() = 0;
   virtual void IHeadsetInterface_UnkFunc59(f64 a2) = 0;
   virtual f64 IHeadsetInterface_UnkFunc60() = 0;
