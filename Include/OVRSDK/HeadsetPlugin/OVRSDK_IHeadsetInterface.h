@@ -74,7 +74,7 @@ public:
   virtual void GetTrackerSerialNumber(u32 trackerIndex, IOVRString** out_SerialNumber) = 0;
   virtual void IHeadsetInterface_UnkFunc46(u32 trackerIndex, IOVRString** out_a3) = 0; // Just returns "NONE", no clue.
   virtual void IHeadsetInterface_UnkFunc47() = 0;
-  virtual void GetHmdInfo(ovrHmdInfo* out_HmdInfo) = 0; // todo
+  virtual void GetHmdInfo(ovrHmdInfo* out_HmdInfo) = 0;
   virtual void IHeadsetInterface_UnkFunc49() = 0;
   virtual void IHeadsetInterface_UnkFunc50() = 0;
   virtual void IHeadsetInterface_UnkFunc51() = 0; // latency of something? returns 0 on rift and emulation
