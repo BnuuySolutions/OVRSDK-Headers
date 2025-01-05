@@ -142,7 +142,7 @@ public:
 
   virtual int IHeadsetToRuntimeInterface_StubFunc73() { return 1; }
 
-  virtual ovrsdkResult GetDisplayList(ovrDisplayInfo list[], u32* out_Count) = 0;
+  virtual ovrsdkResult GetDisplayList(ovrsdkDisplayInfo list[], u32* out_Count) = 0;
 
   virtual void IHeadsetToRuntimeInterface_StubFunc75() {}
   virtual void IHeadsetToRuntimeInterface_StubFunc76() {}

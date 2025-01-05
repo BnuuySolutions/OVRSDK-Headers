@@ -175,7 +175,7 @@ typedef struct OVRSDK_ALIGNAS(8) ovrCombinedControllerState_ {
 } ovrCombinedControllerState;
 // TODO(whatdahopper): assert sizeof
 
-typedef struct OVRSDK_ALIGNAS(4) ovrDisplayInfo_ {
+typedef struct OVRSDK_ALIGNAS(4) ovrsdkDisplayInfo_ {
   char DeviceName[0x100];
   u16 EdidVendorId; // Usually 0xD23E
   char EdidSerial[0x40];
@@ -190,8 +190,8 @@ typedef struct OVRSDK_ALIGNAS(4) ovrDisplayInfo_ {
   u32 ovrDisplayInfo_UnkVar016C;
   u8 Edid[0x100];
   u32 ovrDisplayInfo_UnkVar0270;
-} ovrDisplayInfo;
-static_assert(sizeof(ovrDisplayInfo) == 0x274, "sizeof(ovrDisplayInfo) is not correct");
+} ovrsdkDisplayInfo;
+static_assert(sizeof(ovrsdkDisplayInfo) == 0x274, "sizeof(ovrsdkDisplayInfo) is not correct");
 
 typedef struct OVRSDK_ALIGNAS(4) ovrScreenInfo_ {
   ovrSizei ResolutionInPixels;
