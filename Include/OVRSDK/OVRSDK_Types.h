@@ -112,15 +112,12 @@ typedef enum ovrCapsenseType_ {
 
 /* Structs */
 
-typedef struct OVRSDK_ALIGNAS(4) ovrSizei_ {
-  s32 w, h;
-} ovrSizei;
-static_assert(sizeof(ovrSizei) == 0x8, "sizeof(ovrSizei) is not correct");
-
-typedef struct OVRSDK_ALIGNAS(4) ovrSizef_ {
-  f32 w, h;
-} ovrSizef;
-static_assert(sizeof(ovrSizef) == 0x8, "sizeof(ovrSizef) is not correct");
+template <typename T>
+struct ovrsdkSize {
+  T w, h;
+};
+static_assert(sizeof(ovrsdkSize<s32>) == 0x8, "sizeof(ovrsdkSize<s32>) is not correct");
+static_assert(sizeof(ovrsdkSize<f32>) == 0x8, "sizeof(ovrsdkSize<f32>) is not correct");
 
 typedef struct OVRSDK_ALIGNAS(8) ovrQuatd_ {
   f64 x, y, z, w;
@@ -180,8 +177,8 @@ typedef struct OVRSDK_ALIGNAS(4) ovrsdkDisplayInfo_ {
   u16 EdidVendorId; // Usually 0xD23E
   char EdidSerial[0x40];
   u16 ovrDisplayInfo_UnkVar0142;
-  ovrSizei NativeResolution;
-  ovrSizei Resolution;
+  ovrsdkSize<s32> NativeResolution;
+  ovrsdkSize<s32> Resolution;
   DXGI_RATIONAL RefreshRate;
   b8 ApplicationOnlyMode;
   b8 ovrDisplayInfo_UnkVar015D;
@@ -194,8 +191,8 @@ typedef struct OVRSDK_ALIGNAS(4) ovrsdkDisplayInfo_ {
 static_assert(sizeof(ovrsdkDisplayInfo) == 0x274, "sizeof(ovrsdkDisplayInfo) is not correct");
 
 typedef struct OVRSDK_ALIGNAS(4) ovrScreenInfo_ {
-  ovrSizei ResolutionInPixels;
-  ovrSizef SizeInMeters;
+  ovrsdkSize<s32> ResolutionInPixels;
+  ovrsdkSize<s32> SizeInMeters;
   f32 LensToScreenOffsetInMeters[3];
   f32 ovrScreenInfo_UnkData001C[7];
 } ovrScreenInfo;
@@ -236,8 +233,8 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   IOVRString* ManufacturerName;
   u32 Version;
   b8 DebugDevice;
-  ovrSizei ResolutionInPixels;
-  ovrSizef ScreenSizeInMeters;
+  ovrsdkSize<s32> ResolutionInPixels;
+  ovrsdkSize<f32> ScreenSizeInMeters;
   f32 ScreenGapSizeInMeters;
   f32 CenterFromTopInMeters;
   f32 LensSeparationInMeters;
@@ -249,7 +246,7 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u32 LatencyPixelPosition;
   u64 ovrHmdInfo_UnkData00C0[0x4D]; // A lot of info we're discarding here, we don't know what this is.
   b8 ovrHmdInfo_UnkVar0328;
-  ovrSizei FixedFovResolution;
+  ovrsdkSize<s32> FixedFovResolution;
   ovrShutterInfo Shutter;
   ovrLensConfig LensConfigurations[6];
   u32 ovrHmdInfo_UnkVar07DC;
