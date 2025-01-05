@@ -182,20 +182,13 @@ typedef struct OVRSDK_ALIGNAS(8) ovrDisplayInfo_ {
   ovrSizei Resolution;
   DXGI_RATIONAL RefreshRate;
   b8 ApplicationOnlyMode;
-  b8 ovrDisplayInfo_UnkVar015D;
-  b8 ovrDisplayInfo_UnkVar015E;
-  b8 ovrDisplayInfo_UnkVar015F;
-  u32 Rotation;
+  u8 Reserved0;
+  u16 Reserved1;
   u64 Luid;
+  u32 ovrDisplayInfo_UnkVar0168;
+  u8 ovrDisplayInfo_UnkVar016C;
 } ovrDisplayInfo;
 static_assert(sizeof(ovrDisplayInfo) == 0x170, "sizeof(ovrDisplayInfo) is not correct");
-
-typedef struct OVRSDK_ALIGNAS(8) ovrDisplayList_ {
-  u32 Count;
-  char ovrDisplayList_UnkData0004[0x2C]; // TODO(whatdahopper): Actually reserved or not?
-  ovrDisplayInfo* Display; // Fix hardcoded single display at some point.
-} ovrDisplayList;
-// TODO(whatdahopper): assert sizeof
 
 typedef struct OVRSDK_ALIGNAS(4) ovrScreenInfo_ {
   ovrSizei ResolutionInPixels;
