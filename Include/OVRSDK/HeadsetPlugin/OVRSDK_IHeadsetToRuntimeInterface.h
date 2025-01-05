@@ -140,8 +140,9 @@ public:
   virtual void IHeadsetToRuntimeInterface_StubFunc71() {}
   virtual void IHeadsetToRuntimeInterface_StubFunc72() {}
 
-  virtual int IHeadsetToRuntimeInterface_StubFunc73() { return 1; } // Display count?
-  virtual int32_t GetDisplayList(int a2, ovrDisplayList* displays) = 0;
+  virtual int IHeadsetToRuntimeInterface_StubFunc73() { return 1; }
+
+  virtual int32_t GetDisplayList(ovrDisplayInfo list[], u32* out_Count) = 0;
 
   virtual void IHeadsetToRuntimeInterface_StubFunc75() {}
   virtual void IHeadsetToRuntimeInterface_StubFunc76() {}
