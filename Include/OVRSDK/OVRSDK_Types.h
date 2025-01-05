@@ -64,51 +64,51 @@ typedef enum ovrsdkErrorType_ {
   ovrsdkError_InsufficientArraySize = -1016
 } ovrsdkErrorType;
 
-typedef enum ovrLogLevelType_ {
-  ovrLogLevel_Disabled = 0,
-  ovrLogLevel_Trace = 1,
-  ovrLogLevel_Debug = 2,
-  ovrLogLevel_Info = 3,
-  ovrLogLevel_Warning = 4,
-  ovrLogLevel_Error = 5,
-  ovrLogLevel_EnumSize = 0x7fffffff
-} ovrLogLevelType;
+typedef enum ovrsdkLogLevelType_ {
+  ovrsdkLogLevel_Disabled = 0,
+  ovrsdkLogLevel_Trace = 1,
+  ovrsdkLogLevel_Debug = 2,
+  ovrsdkLogLevel_Info = 3,
+  ovrsdkLogLevel_Warning = 4,
+  ovrsdkLogLevel_Error = 5,
+  ovrsdkLogLevel_EnumSize = 0x7fffffff
+} ovrsdkLogLevelType;
 
-typedef enum ovrPluginMode_ {
-  ovrPlugin_Off = 0, // Turns off the headset plugin.
-  ovrPlugin_Detect = 1, // Detects headsets and/or other devices, etc.
-  ovrPlugin_On = 2, // Turns on the headset plugin.
-  ovrPlugin_EnumSize = 0x7fffffff
-} ovrPluginMode;
+typedef enum ovrsdkPluginMode_ {
+  ovrsdkPlugin_Off = 0, // Turns off the headset plugin.
+  ovrsdkPlugin_Detect = 1, // Detects headsets and/or other devices, etc.
+  ovrsdkPlugin_On = 2, // Turns on the headset plugin.
+  ovrsdkPlugin_EnumSize = 0x7fffffff
+} ovrsdkPluginMode;
 
-typedef enum ovrTrackingCaps_ {
-  ovrTrackingCap_Orientation = 0x10, // Orientation tracking (IMU).
-  ovrTrackingCap_MagYawCorrection = 0x20, // Yaw drift correction.
-  ovrTrackingCap_Position = 0x40, // Positional tracking.
-  ovrTrackingCap_EnumSize = 0x7fffffff
-} ovrTrackingCaps;
+typedef enum ovrsdkTrackingCaps_ {
+  ovrsdkTrackingCap_Orientation = 0x10, // Orientation tracking (IMU).
+  ovrsdkTrackingCap_MagYawCorrection = 0x20, // Yaw drift correction.
+  ovrsdkTrackingCap_Position = 0x40, // Positional tracking.
+  ovrsdkTrackingCap_EnumSize = 0x7fffffff
+} ovrsdkTrackingCaps;
 
-typedef enum ovrHandType_ {
-  ovrHand_Left = 0,
-  ovrHand_Right = 1,
-  ovrHand_Count = 2,
-  ovrHand_EnumSize = 0x7fffffff
-} ovrHandType;
+typedef enum ovrsdkHandType_ {
+  ovrsdkHand_Left = 0,
+  ovrsdkHand_Right = 1,
+  ovrsdkHand_Count = 2,
+  ovrsdkHand_EnumSize = 0x7fffffff
+} ovrsdkHandType;
 
-typedef enum ovrCapsenseType_ {
-  ovrCapsense_Thumbstick = 0,
-  ovrCapsense_Button0 = 1, // Y button on Left touch, B button on Right touch
-  ovrCapsense_IndexTrigger = 2,
-  ovrCapsense_Button1 = 3, // X button on Left touch, A button on Right touch
-  ovrCapsense_Reserved0 = 4,
-  ovrCapsense_Reserved1 = 5,
-  ovrCapsense_Reserved2 = 6,
-  ovrCapsense_Thumbrest = 7,
-  ovrCapsense_Reserved4 = 8,
-  ovrCapsense_Reserved5 = 9,
-  ovrCapsense_Count = 10,
-  ovrCapsense_EnumSize = 0x7fffffff
-} ovrCapsenseType;
+typedef enum ovrsdkCapsenseType_ {
+  ovrsdkCapsense_Thumbstick = 0,
+  ovrsdkCapsense_Button0 = 1, // Y button on Left touch, B button on Right touch
+  ovrsdkCapsense_IndexTrigger = 2,
+  ovrsdkCapsense_Button1 = 3, // X button on Left touch, A button on Right touch
+  ovrsdkCapsense_Reserved0 = 4,
+  ovrsdkCapsense_Reserved1 = 5,
+  ovrsdkCapsense_Reserved2 = 6,
+  ovrsdkCapsense_Thumbrest = 7,
+  ovrsdkCapsense_Reserved4 = 8,
+  ovrsdkCapsense_Reserved5 = 9,
+  ovrsdkCapsense_Count = 10,
+  ovrsdkCapsense_EnumSize = 0x7fffffff
+} ovrsdkCapsenseType;
 
 /* Structs */
 
@@ -155,7 +155,7 @@ typedef struct OVRSDK_ALIGNAS(4) ovrControllerState_ {
   u8 BatteryLevel;
   u8 ovrControllerState_UnkData0005[3];
   u32 Buttons;
-  u16 Capsense[ovrCapsense_Count];
+  u16 Capsense[ovrsdkCapsense_Count];
   f32 IndexTrigger;
   f32 HandTrigger;
   ovrsdkVector2<f32> Thumbstick;
@@ -174,7 +174,7 @@ typedef struct OVRSDK_ALIGNAS(4) ovrControllerState_ {
 
 typedef struct OVRSDK_ALIGNAS(8) ovrCombinedControllerState_ {
   u64 ovrLeftRightControllerState_UnkData[2];
-  ovrControllerState Controllers[ovrHand_Count];
+  ovrControllerState Controllers[ovrsdkHand_Count];
 } ovrCombinedControllerState;
 // TODO(whatdahopper): assert sizeof
 

@@ -32,8 +32,8 @@ namespace HeadsetPlugin {
 class IHeadsetInterface : public OVRInterface::IUnknown {
 public:
   virtual void IHeadsetInterface_UnkFunc05(char* a2) = 0; // todo
-  virtual void SetPluginMode(ovrPluginMode pluginMode) = 0;
-  virtual ovrPluginMode GetPluginMode() = 0;
+  virtual void SetPluginMode(ovrsdkPluginMode pluginMode) = 0;
+  virtual ovrsdkPluginMode GetPluginMode() = 0;
   virtual void GetPluginName(IOVRString** out_PluginName) = 0;
   virtual void GetRuntimeInterface(IHeadsetToRuntimeInterface2** out_RuntimeInterface) = 0;
   virtual void IHeadsetInterface_NullsubFunc10() {} // Not nullsub on RiftS, sets a value in instance.
