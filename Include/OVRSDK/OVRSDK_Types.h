@@ -175,20 +175,20 @@ typedef struct OVRSDK_ALIGNAS(8) ovrCombinedControllerState_ {
 
 typedef struct OVRSDK_ALIGNAS(8) ovrDisplayInfo_ {
   char DeviceName[0x100];
-  u16 EdidVendorId;
+  u16 EdidVendorId; // Usually 0xD23E
   char EdidSerial[0x40];
   u16 ovrDisplayInfo_UnkVar0142;
-  ovrSizei Resolution0;
-  ovrSizei Resolution1; // Wtf? Why 2?
+  ovrSizei NativeResolution;
+  ovrSizei Resolution;
   DXGI_RATIONAL RefreshRate;
   b8 ApplicationOnlyMode;
-  u8 Reserved0;
-  u16 Reserved1;
+  b8 ovrDisplayInfo_UnkVar015D;
+  b8 ovrDisplayInfo_UnkVar015E;
+  b8 ovrDisplayInfo_UnkVar015F;
+  u32 Rotation;
   u64 Luid;
-  u32 ovrDisplayInfo_UnkVar0168;
-  u8 ovrDisplayInfo_UnkVar016C;
 } ovrDisplayInfo;
-// TODO(whatdahopper): assert sizeof
+static_assert(sizeof(ovrDisplayInfo) == 0x170, "sizeof(ovrDisplayInfo) is not correct");
 
 typedef struct OVRSDK_ALIGNAS(8) ovrDisplayList_ {
   u32 Count;
