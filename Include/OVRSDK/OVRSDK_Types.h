@@ -264,9 +264,9 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u32 ovrHmdInfo_UnkVar0828;
   IOVRString* DisplayUniqueId; // Actually display unique ID?
   u32 ovrHmdInfo_UnkVar0838;
-  IOVRString* ovrHmdInfo_UnkVar0840;
+  IOVRString* WindowsAudioID;
   IOVRString* ovrHmdInfo_UnkVar0848;
-  IOVRString* DisplaySerial;
+  IOVRString* DeviceSerial;
   IOVRString* LeftScreenSerial;
   IOVRString* RightScreenSerial;
   IOVRString* ovrHmdInfo_UnkVar0868;
