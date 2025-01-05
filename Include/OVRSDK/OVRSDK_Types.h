@@ -119,20 +119,26 @@ struct ovrsdkSize {
 static_assert(sizeof(ovrsdkSize<s32>) == 0x8, "sizeof(ovrsdkSize<s32>) is not correct");
 static_assert(sizeof(ovrsdkSize<f32>) == 0x8, "sizeof(ovrsdkSize<f32>) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(8) ovrQuatd_ {
-  f64 x, y, z, w;
-} ovrQuatd;
-static_assert(sizeof(ovrQuatd) == 0x20, "sizeof(ovrQuatd) is not correct");
+template <typename T>
+struct ovrsdkQuat {
+  T x, y, z, w;
+};
+static_assert(sizeof(ovrsdkQuat<f32>) == 0x10, "sizeof(ovrsdkQuat<f32>) is not correct");
+static_assert(sizeof(ovrsdkQuat<f64>) == 0x20, "sizeof(ovrsdkQuat<f64>) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(8) ovrVector3d_ {
-  f64 x, y, z;
-} ovrVector3d;
-static_assert(sizeof(ovrVector3d) == 0x18, "sizeof(ovrVector3d) is not correct");
+template <typename T>
+struct ovrsdkVector3 {
+  T x, y, z;
+};
+static_assert(sizeof(ovrsdkVector3<f32>) == 0xC, "sizeof(ovrsdkVector3<f32>) is not correct");
+static_assert(sizeof(ovrsdkVector3<f64>) == 0x18, "sizeof(ovrsdkVector3<f64>) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(4) ovrVector2f_ {
-  f32 x, y;
-} ovrVector2f;
-static_assert(sizeof(ovrVector2f) == 0x8, "sizeof(ovrVector2f) is not correct");
+template <typename T>
+struct ovrsdkVector2 {
+  T x, y;
+};
+static_assert(sizeof(ovrsdkVector2<f32>) == 0x8, "sizeof(ovrsdkVector2<f32>) is not correct");
+static_assert(sizeof(ovrsdkVector2<f64>) == 0x10, "sizeof(ovrsdkVector2<f64>) is not correct");
 
 typedef struct OVRSDK_ALIGNAS(8) ovrInterfaceDesc_ {
   u64 ClassId;
@@ -152,15 +158,15 @@ typedef struct OVRSDK_ALIGNAS(4) ovrControllerState_ {
   u16 Capsense[ovrCapsense_Count];
   f32 IndexTrigger;
   f32 HandTrigger;
-  ovrVector2f Thumbstick;
+  ovrsdkVector2<f32> Thumbstick;
   u32 ovrControllerState_UnkData0030[7];
   f32 IndexTriggerNoDeadzone;
   f32 HandTriggerNoDeadzone;
-  ovrVector2f ThumbstickNoDeadzone;
+  ovrsdkVector2<f32> ThumbstickNoDeadzone;
   u32 ovrControllerState_UnkData005C[7];
   f32 IndexTriggerRaw;
   f32 HandTriggerRaw;
-  ovrVector2f ThumbstickRaw;
+  ovrsdkVector2<f32> ThumbstickRaw;
   u32 ovrControllerState_UnkData0088[7];
   u32 ovrControllerState_UnkVar00A4;
 } ovrControllerState;
@@ -313,15 +319,15 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
 static_assert(sizeof(ovrHmdInfo) == 0x938, "sizeof(ovrHmdInfo) is not correct");
 
 typedef struct ovrPosed_ {
-  ovrQuatd Orientation;
-  ovrVector3d Position;
+  ovrsdkQuat<f64> Orientation;
+  ovrsdkVector3<f64> Position;
 } ovrPosed;
 
 typedef class ovrPoseStated_ {
   ovrPosed ThePose;
-  ovrVector3d AngularVelocity;
-  ovrVector3d LinearVelocity;
-  ovrVector3d AngularAcceleration;
-  ovrVector3d LinearAcceleration;
+  ovrsdkVector3<f64> AngularVelocity;
+  ovrsdkVector3<f64> LinearVelocity;
+  ovrsdkVector3<f64> AngularAcceleration;
+  ovrsdkVector3<f64> LinearAcceleration;
   f64 TimeInSeconds;
 } ovrPoseStated;
