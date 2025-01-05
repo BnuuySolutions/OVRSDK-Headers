@@ -48,7 +48,9 @@ using u64 = std::uint64_t; // Unsigned 64-bit integer
 using f32 = std::float_t; // 32-bit floating-point
 using f64 = std::double_t; // 64-bit floating-point
 
-using b8 = u8; // Boolean (8-bit)
+using b8 = u8; // Boolean (unsigned 8-bit integer)
+
+using ovrsdkResult = s32; // OVRSDK result (signed 32-bit integer)
 
 // Forward-declare some internal types.
 
@@ -56,11 +58,11 @@ class IOVRString;
 
 /* Enums */
 
-typedef enum ovrErrorType_ {
-  ovrError_InvalidParameter = -1005,
-  ovrError_Unsupported = -1009,
-  ovrError_InsufficientArraySize = -1016
-} ovrErrorType;
+typedef enum ovrsdkErrorType_ {
+  ovrsdkError_InvalidParameter = -1005,
+  ovrsdkError_Unsupported = -1009,
+  ovrsdkError_InsufficientArraySize = -1016
+} ovrsdkErrorType;
 
 typedef enum ovrLogLevelType_ {
   ovrLogLevel_Disabled = 0,
