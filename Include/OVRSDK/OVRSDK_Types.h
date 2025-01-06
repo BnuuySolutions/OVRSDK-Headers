@@ -21,7 +21,7 @@
 // SOFTWARE.
 #pragma once
 
-#include <dxgicommon.h>
+#include <dxgi1_2.h>
 #include <cstdint>
 #include <cmath>
 
@@ -320,12 +320,12 @@ typedef struct OVRSDK_ALIGNAS(8) ovrsdkHmdInfo_ {
 } ovrsdkHmdInfo;
 static_assert(sizeof(ovrsdkHmdInfo) == 0x938, "sizeof(ovrsdkHmdInfo) is not correct");
 
-typedef struct ovrPose_ {
+typedef struct ovrsdkPose_ {
   ovrsdkQuat<f64> Orientation;
   ovrsdkVector3<f64> Position;
 } ovrsdkPose;
 
-typedef class ovrPoseState_ {
+typedef struct ovrsdkPoseState_ {
   ovrsdkPose ThePose;
   ovrsdkVector3<f64> AngularVelocity;
   ovrsdkVector3<f64> LinearVelocity;
