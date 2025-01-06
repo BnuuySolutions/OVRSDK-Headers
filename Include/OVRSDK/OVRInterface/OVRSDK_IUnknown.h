@@ -23,6 +23,8 @@
 
 #include "OVRSDK_IRefCounted.h"
 
+#define OVRSDK_IID_LESS_THAN_OR_EQUAL(iid_, num) iid_ - 1 <= num
+
 namespace OVRInterface {
 
 class IUnknown : public IRefCounted {

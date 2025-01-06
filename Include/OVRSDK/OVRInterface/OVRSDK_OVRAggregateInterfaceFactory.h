@@ -39,7 +39,7 @@ private:
 
 public:
   void* QueryInterface(u64 iid) override {
-    if (iid - 1 <= 3) return this;
+    if (OVRSDK_IID_LESS_THAN_OR_EQUAL(iid, 3)) return this;
     return nullptr;
   }
 
