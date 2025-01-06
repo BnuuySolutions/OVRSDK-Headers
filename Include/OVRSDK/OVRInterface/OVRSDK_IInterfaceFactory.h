@@ -32,12 +32,8 @@
       return nullptr; \
     } \
     void* CreateInterface(void** out_Interface, u64 clsid) override { \
-      if (clsid == ##clsid_) { \
-        *out_Interface = new clazz; \
-        return out_Interface; \
-      } \
-      *out_Interface = 0; \
-      return out_Interface; \
+      if (clsid == ##clsid_) return (*out_Interface = new clazz); \
+      return (*out_Interface = 0); \
     } \
   }
 
