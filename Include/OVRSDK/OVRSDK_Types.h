@@ -198,15 +198,15 @@ typedef struct OVRSDK_ALIGNAS(4) ovrsdkDisplayInfo_ {
 } ovrsdkDisplayInfo;
 static_assert(sizeof(ovrsdkDisplayInfo) == 0x274, "sizeof(ovrsdkDisplayInfo) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(4) ovrScreenInfo_ {
+typedef struct OVRSDK_ALIGNAS(4) ovrsdkScreenInfo_ {
   ovrsdkSize<s32> ResolutionInPixels;
   ovrsdkSize<s32> SizeInMeters;
   f32 LensToScreenOffsetInMeters[3];
   u32 ovrScreenInfo_UnkData001C[7];
-} ovrScreenInfo;
-static_assert(sizeof(ovrScreenInfo) == 0x38, "sizeof(ovrScreenInfo) is not correct");
+} ovrsdkScreenInfo;
+static_assert(sizeof(ovrsdkScreenInfo) == 0x38, "sizeof(ovrsdkScreenInfo) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(4) ovrShutterInfo_ {
+typedef struct OVRSDK_ALIGNAS(4) ovrsdkShutterInfo_ {
   u32 Type;
   f32 VsyncToNextVsync;
   f32 VsyncToFirstScanline;
@@ -216,10 +216,10 @@ typedef struct OVRSDK_ALIGNAS(4) ovrShutterInfo_ {
   b8 HasOverdriveOverride;
   f32 OverdriveScale[2];
   u32 ovrShutterInfo_UnkVar0024;
-} ovrShutterInfo;
-static_assert(sizeof(ovrShutterInfo) == 0x28, "sizeof(ovrShutterInfo) is not correct");
+} ovrsdkShutterInfo;
+static_assert(sizeof(ovrsdkShutterInfo) == 0x28, "sizeof(ovrsdkShutterInfo) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(4) ovrLensConfig_ {
+typedef struct OVRSDK_ALIGNAS(4) ovrsdkLensConfig_ {
   f32 EyeRelief;
   f32 LensToScreen;
   u32 Eqn;
@@ -233,8 +233,8 @@ typedef struct OVRSDK_ALIGNAS(4) ovrLensConfig_ {
   f32 ChromaticAberration[4];
   u32 ovrLensConfig_UnkData0064[0x11];
   f32 PerMMEyeShiftSwim[6];
-} ovrLensConfig;
-static_assert(sizeof(ovrLensConfig) == 0xC0, "sizeof(ovrLensConfig) is not correct");
+} ovrsdkLensConfig;
+static_assert(sizeof(ovrsdkLensConfig) == 0xC0, "sizeof(ovrsdkLensConfig) is not correct");
 
 typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   IOVRString* ProductName;
@@ -246,8 +246,8 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   f32 ScreenGapSizeInMeters;
   f32 CenterFromTopInMeters;
   f32 LensSeparationInMeters;
-  ovrScreenInfo LeftScreen;
-  ovrScreenInfo RightScreen;
+  ovrsdkScreenInfo LeftScreen;
+  ovrsdkScreenInfo RightScreen;
   f32 PelOffsetR[2];
   f32 PelOffsetB[2];
   u32 Rotation;
@@ -255,8 +255,8 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u64 ovrHmdInfo_UnkData00C0[0x4D]; // A lot of info we're discarding here, we don't know what this is.
   b8 ovrHmdInfo_UnkVar0328;
   ovrsdkSize<s32> FixedFovResolution;
-  ovrShutterInfo Shutter;
-  ovrLensConfig LensConfigurations[6];
+  ovrsdkShutterInfo Shutter;
+  ovrsdkLensConfig LensConfigurations[6];
   u32 ovrHmdInfo_UnkVar07DC;
   u64 ovrHmdInfo_UnkData07E0[8];
   u32 ovrHmdInfo_UnkVar0820;
@@ -267,10 +267,8 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   IOVRString* AudioDeviceId;
   IOVRString* ovrHmdInfo_UnkVar0848;
   IOVRString* DeviceSerial;
-  IOVRString* LeftDisplaySerial;
-  IOVRString* RightDisplaySerial;
-  IOVRString* LeftLensSerial;
-  IOVRString* RightLensSerial;
+  IOVRString* DisplaySerials[2];
+  IOVRString* LensSerials[2];
   u8 ovrHmdInfo_UnkVar0878;
   IOVRString* ovrHmdInfo_UnkVar0880;
   u32 UsbVendorId;
@@ -317,8 +315,8 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u64 ovrHmdInfo_UnkVar0928;
   u8 ovrHmdInfo_UnkVar0930;
   u8 ovrHmdInfo_UnkVar0931;
-} ovrHmdInfo;
-static_assert(sizeof(ovrHmdInfo) == 0x938, "sizeof(ovrHmdInfo) is not correct");
+} ovrsdkHmdInfo;
+static_assert(sizeof(ovrsdkHmdInfo) == 0x938, "sizeof(ovrsdkHmdInfo) is not correct");
 
 typedef struct ovrPosed_ {
   ovrsdkQuat<f64> Orientation;
