@@ -33,6 +33,8 @@
 #error "Unsupported Platform."
 #endif
 
+#define OVRSDK_IID_LESS_THAN_OR_EQUAL(iid_, num) iid_ - 1 <= num
+
 /* Types */
 
 #ifndef _OVRSDK_CORE_VALUE_TYPES_
