@@ -28,12 +28,10 @@
     OVRSDK_IREFCOUNTED_IMPL \
   public: \
     void* QueryInterface(u64 iid) override { \
-      if (OVRSDK_IID_LESS_THAN_OR_EQUAL(iid, 2)) return (OVRInterface::IInterfaceFactory*)this; \
-      return nullptr; \
+      return OVRSDK_IID_LESS_THAN_OR_EQUAL(iid, 2) ? (OVRInterface::IInterfaceFactory*)this : nullptr; \
     } \
     void* CreateInterface(void** out_Interface, u64 clsid) override { \
-      if (clsid == ##clsid_) return (*out_Interface = new clazz); \
-      return (*out_Interface = 0); \
+      return clsid == ##clsid_ ? (*out_Interface = new clazz) : (*out_Interface = 0); \
     } \
   }
 
