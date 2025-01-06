@@ -35,6 +35,9 @@
 
 /* Types */
 
+#ifndef _OVRSDK_CORE_VALUE_TYPES_
+#define _OVRSDK_CORE_VALUE_TYPES_
+
 using s8 = std::int8_t; // Signed 8-bit integer
 using s16 = std::int16_t; // Signed 16-bit integer
 using s32 = std::int32_t; // Signed 32-bit integer
@@ -49,6 +52,8 @@ using f32 = std::float_t; // 32-bit floating-point
 using f64 = std::double_t; // 64-bit floating-point
 
 using b8 = u8; // Boolean (unsigned 8-bit integer)
+
+#endif // _OVRSDK_CORE_VALUE_TYPES_
 
 using ovrsdkResult = s32; // OVRSDK result (signed 32-bit integer)
 
@@ -143,10 +148,7 @@ static_assert(sizeof(ovrsdkVector2<f64>) == 0x10, "sizeof(ovrsdkVector2<f64>) is
 typedef struct OVRSDK_ALIGNAS(8) ovrInterfaceDesc_ {
   u64 ClassId;
   char ClassName[0x40];
-  u64 InterfaceId0;
-  u64 InterfaceId1;
-  u64 InterfaceId2;
-  u64 InterfaceId3;
+  u64 InterfaceIds[4];
 } ovrInterfaceDesc;
 static_assert(sizeof(ovrInterfaceDesc) == 0x68, "sizeof(ovrInterfaceDesc) is not correct");
 
@@ -200,7 +202,7 @@ typedef struct OVRSDK_ALIGNAS(4) ovrScreenInfo_ {
   ovrsdkSize<s32> ResolutionInPixels;
   ovrsdkSize<s32> SizeInMeters;
   f32 LensToScreenOffsetInMeters[3];
-  f32 ovrScreenInfo_UnkData001C[7];
+  u32 ovrScreenInfo_UnkData001C[7];
 } ovrScreenInfo;
 static_assert(sizeof(ovrScreenInfo) == 0x38, "sizeof(ovrScreenInfo) is not correct");
 
@@ -260,9 +262,9 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u32 ovrHmdInfo_UnkVar0820;
   u32 ovrHmdInfo_UnkVar0824;
   u32 ovrHmdInfo_UnkVar0828;
-  IOVRString* DisplayUniqueId; // Actually display unique ID?
+  IOVRString* DisplayDeviceName;
   u32 ovrHmdInfo_UnkVar0838;
-  IOVRString* WindowsAudioId;
+  IOVRString* AudioDeviceId;
   IOVRString* ovrHmdInfo_UnkVar0848;
   IOVRString* DeviceSerial;
   IOVRString* LeftDisplaySerial;
@@ -288,7 +290,7 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   b8 SupportsSPUDUniformityCorrection;
   b8 SupportsSPUDCorrection;
   b8 SupportsLofiCorrection;
-  f32 DisplayGamma;
+  f32 DisplayNativeGamma;
   u32 ovrHmdInfo_UnkData08AC[7];
   u32 CompositorDistortionType;
   u32 ovrHmdInfo_UnkData08CC[4];

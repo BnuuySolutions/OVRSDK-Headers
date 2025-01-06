@@ -64,10 +64,10 @@ public:
 
     while (true) {
       if (iid != -1 &&
-          (*it).Desc.InterfaceId0 != iid &&
-          (*it).Desc.InterfaceId1 != iid &&
-          (*it).Desc.InterfaceId2 != iid &&
-          (*it).Desc.InterfaceId3 != iid) {
+          (*it).Desc.InterfaceIds[0] != iid &&
+          (*it).Desc.InterfaceIds[1] != iid &&
+          (*it).Desc.InterfaceIds[2] != iid &&
+          (*it).Desc.InterfaceIds[3] != iid) {
         goto IterateVector;
       }
 
