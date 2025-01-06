@@ -31,11 +31,11 @@ class OVRAggregateInterfaceFactory : public IAggregateInterfaceFactory {
   OVRSDK_IREFCOUNTED_IMPL
 
 private:
-  typedef struct ovrFactoryDesc_ {
+  typedef struct ovrsdkFactoryDesc_ {
     IInterfaceFactory* Factory;
-    ovrInterfaceDesc Desc;
-  } ovrFactoryDesc;
-  std::vector<ovrFactoryDesc> Factories = {};
+    ovrsdkInterfaceDesc Desc;
+  } ovrsdkFactoryDesc;
+  std::vector<ovrsdkFactoryDesc> Factories = {};
 
 public:
   void* QueryInterface(u64 iid) override {
@@ -55,7 +55,7 @@ public:
     return out_Interface;
   }
 
-  bool GetInterfaceDescriptors(u64* out_Length, ovrInterfaceDesc arr[], u64 iid) override {
+  bool GetInterfaceDescriptors(u64* out_Length, ovrsdkInterfaceDesc arr[], u64 iid) override {
     u64 length = *out_Length;
     *out_Length = 0;
 
@@ -88,7 +88,7 @@ public:
     return false;
   }
 
-  void RegisterFactory(IInterfaceFactory* factory, ovrInterfaceDesc* desc) override {
+  void RegisterFactory(IInterfaceFactory* factory, ovrsdkInterfaceDesc* desc) override {
     Factories.push_back({ .Factory = factory, .Desc = *desc });
   }
 };

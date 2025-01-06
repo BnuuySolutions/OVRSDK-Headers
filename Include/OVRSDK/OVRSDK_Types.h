@@ -145,56 +145,56 @@ struct ovrsdkVector2 {
 static_assert(sizeof(ovrsdkVector2<f32>) == 0x8, "sizeof(ovrsdkVector2<f32>) is not correct");
 static_assert(sizeof(ovrsdkVector2<f64>) == 0x10, "sizeof(ovrsdkVector2<f64>) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(8) ovrInterfaceDesc_ {
+typedef struct OVRSDK_ALIGNAS(8) ovrsdkInterfaceDesc_ {
   u64 ClassId;
   char ClassName[0x40];
   u64 InterfaceIds[4];
-} ovrInterfaceDesc;
-static_assert(sizeof(ovrInterfaceDesc) == 0x68, "sizeof(ovrInterfaceDesc) is not correct");
+} ovrsdkInterfaceDesc;
+static_assert(sizeof(ovrsdkInterfaceDesc) == 0x68, "sizeof(ovrsdkInterfaceDesc) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(4) ovrControllerState_ {
+typedef struct OVRSDK_ALIGNAS(4) ovrsdkControllerState_ {
   u32 Connected;
   u8 BatteryLevel;
-  u8 ovrControllerState_UnkData0005[3];
+  u8 ovrsdkControllerState_UnkData0005[3];
   u32 Buttons;
   u16 Capsense[ovrsdkCapsense_Count];
   f32 IndexTrigger;
   f32 HandTrigger;
   ovrsdkVector2<f32> Thumbstick;
-  u32 ovrControllerState_UnkData0030[7];
+  u32 ovrsdkControllerState_UnkData0030[7];
   f32 IndexTriggerNoDeadzone;
   f32 HandTriggerNoDeadzone;
   ovrsdkVector2<f32> ThumbstickNoDeadzone;
-  u32 ovrControllerState_UnkData005C[7];
+  u32 ovrsdkControllerState_UnkData005C[7];
   f32 IndexTriggerRaw;
   f32 HandTriggerRaw;
   ovrsdkVector2<f32> ThumbstickRaw;
-  u32 ovrControllerState_UnkData0088[7];
-  u32 ovrControllerState_UnkVar00A4;
-} ovrControllerState;
+  u32 ovrsdkControllerState_UnkData0088[7];
+  u32 ovrsdkControllerState_UnkVar00A4;
+} ovrsdkControllerState;
 // TODO(whatdahopper): assert sizeof
 
-typedef struct OVRSDK_ALIGNAS(8) ovrCombinedControllerState_ {
-  u64 ovrLeftRightControllerState_UnkData[2];
-  ovrControllerState Controllers[ovrsdkHand_Count];
-} ovrCombinedControllerState;
+typedef struct OVRSDK_ALIGNAS(8) ovrsdkCombinedControllerState_ {
+  u64 ovrsdkCombinedControllerState_UnkData[2];
+  ovrsdkControllerState Controllers[ovrsdkHand_Count];
+} ovrsdkCombinedControllerState;
 // TODO(whatdahopper): assert sizeof
 
 typedef struct OVRSDK_ALIGNAS(4) ovrsdkDisplayInfo_ {
   char DeviceName[0x100];
   u16 EdidVendorId; // Usually 0xD23E
   char EdidSerial[0x40];
-  u16 ovrDisplayInfo_UnkVar0142;
+  u16 ovrsdkDisplayInfo_UnkVar0142;
   ovrsdkSize<s32> NativeResolution;
   ovrsdkSize<s32> Resolution;
   DXGI_RATIONAL RefreshRate;
   b8 ApplicationOnlyMode;
-  b8 ovrDisplayInfo_UnkVar015D;
-  u32 ovrDisplayInfo_UnkVar0160;
+  b8 ovrsdkDisplayInfo_UnkVar015D;
+  u32 ovrsdkDisplayInfo_UnkVar0160;
   LUID AdapterLuid;
-  u32 ovrDisplayInfo_UnkVar016C;
+  u32 ovrsdkDisplayInfo_UnkVar016C;
   u8 Edid[0x100];
-  u32 ovrDisplayInfo_UnkVar0270;
+  u32 ovrsdkDisplayInfo_UnkVar0270;
 } ovrsdkDisplayInfo;
 static_assert(sizeof(ovrsdkDisplayInfo) == 0x274, "sizeof(ovrsdkDisplayInfo) is not correct");
 
@@ -202,7 +202,7 @@ typedef struct OVRSDK_ALIGNAS(4) ovrsdkScreenInfo_ {
   ovrsdkSize<s32> ResolutionInPixels;
   ovrsdkSize<s32> SizeInMeters;
   f32 LensToScreenOffsetInMeters[3];
-  u32 ovrScreenInfo_UnkData001C[7];
+  u32 ovrsdkScreenInfo_UnkData001C[7];
 } ovrsdkScreenInfo;
 static_assert(sizeof(ovrsdkScreenInfo) == 0x38, "sizeof(ovrsdkScreenInfo) is not correct");
 
@@ -215,7 +215,7 @@ typedef struct OVRSDK_ALIGNAS(4) ovrsdkShutterInfo_ {
   f32 PixelPersistence;
   b8 HasOverdriveOverride;
   f32 OverdriveScale[2];
-  u32 ovrShutterInfo_UnkVar0024;
+  u32 ovrsdkShutterInfo_UnkVar0024;
 } ovrsdkShutterInfo;
 static_assert(sizeof(ovrsdkShutterInfo) == 0x28, "sizeof(ovrsdkShutterInfo) is not correct");
 
@@ -227,16 +227,16 @@ typedef struct OVRSDK_ALIGNAS(4) ovrsdkLensConfig_ {
    * The extra remaining bytes, instead of it being unknown data, it might be 5 more parameters.
    */
   f32 K[11];
-  u32 ovrLensConfig_UnkData0038[5];
+  u32 ovrsdkLensConfig_UnkData0038[5];
   f32 MaxR;
   f32 MetersPerTanAngleAtCenter;
   f32 ChromaticAberration[4];
-  u32 ovrLensConfig_UnkData0064[0x11];
+  u32 ovrsdkLensConfig_UnkData0064[0x11];
   f32 PerMMEyeShiftSwim[6];
 } ovrsdkLensConfig;
 static_assert(sizeof(ovrsdkLensConfig) == 0xC0, "sizeof(ovrsdkLensConfig) is not correct");
 
-typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
+typedef struct OVRSDK_ALIGNAS(8) ovrsdkHmdInfo_ {
   IOVRString* ProductName;
   IOVRString* ManufacturerName;
   u32 Version;
@@ -252,29 +252,29 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   f32 PelOffsetB[2];
   u32 Rotation;
   u32 LatencyPixelPosition;
-  u64 ovrHmdInfo_UnkData00C0[0x4D]; // A lot of info we're discarding here, we don't know what this is.
-  b8 ovrHmdInfo_UnkVar0328;
+  u64 ovrsdkHmdInfo_UnkData00C0[0x4D]; // A lot of info we're discarding here, we don't know what this is.
+  b8 ovrsdkHmdInfo_UnkVar0328;
   ovrsdkSize<s32> FixedFovResolution;
   ovrsdkShutterInfo Shutter;
   ovrsdkLensConfig LensConfigurations[6];
-  u32 ovrHmdInfo_UnkVar07DC;
-  u64 ovrHmdInfo_UnkData07E0[8];
-  u32 ovrHmdInfo_UnkVar0820;
-  u32 ovrHmdInfo_UnkVar0824;
-  u32 ovrHmdInfo_UnkVar0828;
+  u32 ovrsdkHmdInfo_UnkVar07DC;
+  u64 ovrsdkHmdInfo_UnkData07E0[8];
+  u32 ovrsdkHmdInfo_UnkVar0820;
+  u32 ovrsdkHmdInfo_UnkVar0824;
+  u32 ovrsdkHmdInfo_UnkVar0828;
   IOVRString* DisplayDeviceName;
-  u32 ovrHmdInfo_UnkVar0838;
+  u32 ovrsdkHmdInfo_UnkVar0838;
   IOVRString* AudioDeviceId;
-  IOVRString* ovrHmdInfo_UnkVar0848;
+  IOVRString* ovrsdkHmdInfo_UnkVar0848;
   IOVRString* DeviceSerial;
   IOVRString* DisplaySerials[2];
   IOVRString* LensSerials[2];
-  u8 ovrHmdInfo_UnkVar0878;
-  IOVRString* ovrHmdInfo_UnkVar0880;
+  u8 ovrsdkHmdInfo_UnkVar0878;
+  IOVRString* ovrsdkHmdInfo_UnkVar0880;
   u32 UsbVendorId;
   u32 UsbProductId;
-  u32 ovrHmdInfo_UnkVar0890;
-  u32 ovrHmdInfo_UnkVar0894;
+  u32 ovrsdkHmdInfo_UnkVar0890;
+  u32 ovrsdkHmdInfo_UnkVar0894;
   b8 ScreenLinkedToLenses;
   b8 SupportsLowPersistence;
   b8 SupportsPositionalTracking;
@@ -282,16 +282,16 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   u32 CapiReportedHmdType;
   b8 SupportsIADAdjust;
   b8 SupportsGuardianOnHost;
-  b8 ovrHmdInfo_UnkVar08A2;
+  b8 ovrsdkHmdInfo_UnkVar08A2;
   b8 SupportsDirectPentile;
   b8 SupportsLatencyTiming;
   b8 SupportsSPUDUniformityCorrection;
   b8 SupportsSPUDCorrection;
   b8 SupportsLofiCorrection;
   f32 DisplayNativeGamma;
-  u32 ovrHmdInfo_UnkData08AC[7];
+  u32 ovrsdkHmdInfo_UnkData08AC[7];
   u32 CompositorDistortionType;
-  u32 ovrHmdInfo_UnkData08CC[4];
+  u32 ovrsdkHmdInfo_UnkData08CC[4];
   b8 NewerFirmwareAvailable;
   b8 SupportsMixedRealityCapture;
   b8 SupportsInsideOutTracking;
@@ -303,31 +303,31 @@ typedef struct OVRSDK_ALIGNAS(8) ovrHmdInfo_ {
   b8 WindowsUpgradeNeeded;
   u32 MinExternalTrackersRequired;
   u32 PerformanceCheckIndex;
-  u32 ovrHmdInfo_UnkData08F8[2];
+  u32 ovrsdkHmdInfo_UnkData08F8[2];
   u32 LastHealthErrorNumber;
   IOVRString* LastHealthError;
   u32 MaxTrackedDevicesSupported;
-  u32 ovrHmdInfo_UnkVar0914;
-  b8 ovrHmdInfo_UnkVar0918;
-  b8 ovrHmdInfo_UnkVar0919;
-  b8 ovrHmdInfo_UnkVar091A;
-  u64 ovrHmdInfo_UnkVar0920;
-  u64 ovrHmdInfo_UnkVar0928;
-  u8 ovrHmdInfo_UnkVar0930;
-  u8 ovrHmdInfo_UnkVar0931;
+  u32 ovrsdkHmdInfo_UnkVar0914;
+  b8 ovrsdkHmdInfo_UnkVar0918;
+  b8 ovrsdkHmdInfo_UnkVar0919;
+  b8 ovrsdkHmdInfo_UnkVar091A;
+  u64 ovrsdkHmdInfo_UnkVar0920;
+  u64 ovrsdkHmdInfo_UnkVar0928;
+  u8 ovrsdkHmdInfo_UnkVar0930;
+  u8 ovrsdkHmdInfo_UnkVar0931;
 } ovrsdkHmdInfo;
 static_assert(sizeof(ovrsdkHmdInfo) == 0x938, "sizeof(ovrsdkHmdInfo) is not correct");
 
-typedef struct ovrPosed_ {
+typedef struct ovrPose_ {
   ovrsdkQuat<f64> Orientation;
   ovrsdkVector3<f64> Position;
-} ovrPosed;
+} ovrsdkPose;
 
-typedef class ovrPoseStated_ {
-  ovrPosed ThePose;
+typedef class ovrPoseState_ {
+  ovrsdkPose ThePose;
   ovrsdkVector3<f64> AngularVelocity;
   ovrsdkVector3<f64> LinearVelocity;
   ovrsdkVector3<f64> AngularAcceleration;
   ovrsdkVector3<f64> LinearAcceleration;
   f64 TimeInSeconds;
-} ovrPoseStated;
+} ovrsdkPoseState;

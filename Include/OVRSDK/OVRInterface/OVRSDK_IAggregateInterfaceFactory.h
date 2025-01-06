@@ -30,8 +30,8 @@ public:
   /* Gets interface descriptors by an interface ID.
    * You must pass in an array and its size which will be outputted to for its final result.
    */
-  virtual bool GetInterfaceDescriptors(u64* out_Length, ovrInterfaceDesc arr[], u64 iid) = 0; // hint(reverse-engineering): function name guessed
-  virtual void RegisterFactory(IInterfaceFactory* factory, ovrInterfaceDesc* desc) = 0; // hint(reverse-engineering): function name guessed
+  virtual bool GetInterfaceDescriptors(u64* out_Length, ovrsdkInterfaceDesc arr[], u64 iid) = 0; // hint(reverse-engineering): function name guessed
+  virtual void RegisterFactory(IInterfaceFactory* factory, ovrsdkInterfaceDesc* desc) = 0; // hint(reverse-engineering): function name guessed
   
   /* FIXME(whatdahopper): Stubbed for now. */
 

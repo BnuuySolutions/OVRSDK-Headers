@@ -75,11 +75,11 @@ public:
   // 1 = Left touch
   // 2 = Right touch
   // Also, the function name is a guess.
-  virtual void DevicePoseEvent(u8 deviceType, ovrPoseStated* devicePose, uint32_t a4) {
+  virtual void DevicePoseEvent(s32 deviceType, ovrsdkPoseState* devicePose, u32 a4) {
   }
 
   virtual void IHeadsetToRuntimeInterface_StubFunc33() {}
-  virtual void CombinedControllerStateEvent(ovrCombinedControllerState* state) {
+  virtual void CombinedControllerStateEvent(ovrsdkCombinedControllerState* state) {
   }
   virtual void IHeadsetToRuntimeInterface_StubFunc35(void* state, void* test) {
   }
